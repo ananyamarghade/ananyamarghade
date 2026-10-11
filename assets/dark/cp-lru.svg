@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="150" viewBox="0 0 440 150" role="img" aria-labelledby="t d">
+<title id="t">LRU cache</title>
+<desc id="d">A doubly linked list between HEAD and TAIL; the most recently used key sits at the front, the tail is evicted.</desc>
+<style>
+text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+.serif{font-family:Georgia,"Times New Roman",serif}
+.t{fill:#e8e6df}.d{fill:#8a979b}.c{fill:#4fd1c5}.l{fill:#b8e63c}
+.ln{fill:none;stroke:#26343a;stroke-width:1}
+.ar{fill:none;stroke:#8a979b;stroke-width:1.4}
+.sc{fill:none;stroke:#4fd1c5;stroke-width:2;stroke-linejoin:round}
+.box{fill:#111517;stroke:#26343a;stroke-width:1.2}
+.dash{stroke-dasharray:5 4}
+.flow{fill:none;stroke:#4fd1c5;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:8 92;animation:flow 3.4s linear infinite}
+.lm{stroke:#b8e63c}
+.pulse{transform-box:fill-box;transform-origin:center;animation:pulse 2.6s ease-in-out infinite}
+.ty{transform-box:fill-box;transform-origin:left center;animation:type 2.2s steps(28) both}
+.blink{animation:blink 1.1s steps(1) infinite}
+.fadein{animation:rise .9s ease-out both}
+.grow{transform-box:fill-box;transform-origin:left center;animation:grow 1.1s ease-out both}
+@keyframes flow{from{stroke-dashoffset:8}to{stroke-dashoffset:-92}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes type{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+<defs><marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#8a979b"/></marker></defs>
+
+<rect x=".5" y=".5" width="439" height="149" rx="8" fill="#111517" stroke="#26343a"/>
+<text x="18" y="26" class="l" font-size="12" text-anchor="start" >checkpoint_03</text>
+<text x="422" y="26" class="d" font-size="12" text-anchor="end" >systems</text>
+<path class="ln" d="M0 38H440"/>
+<rect class="box dash" x="20" y="70" width="64" height="30"/>
+<text x="52" y="90" class="d" font-size="12" text-anchor="middle" >HEAD</text>
+<path class="ar" d="M84 82H102" marker-start="url(#ar)" marker-end="url(#ar)"/>
+<rect class="box" x="102" y="70" width="64" height="30"/>
+<text x="134" y="90" class="t" font-size="12" text-anchor="middle" >k=7</text>
+<path class="ar" d="M166 82H184" marker-start="url(#ar)" marker-end="url(#ar)"/>
+<rect class="box" x="184" y="70" width="64" height="30"/>
+<text x="216" y="90" class="t" font-size="12" text-anchor="middle" >k=3</text>
+<path class="ar" d="M248 82H266" marker-start="url(#ar)" marker-end="url(#ar)"/>
+<rect class="box" x="266" y="70" width="64" height="30"/>
+<text x="298" y="90" class="t" font-size="12" text-anchor="middle" >k=1</text>
+<path class="ar" d="M330 82H348" marker-start="url(#ar)" marker-end="url(#ar)"/>
+<rect class="box dash" x="348" y="70" width="64" height="30"/>
+<text x="380" y="90" class="d" font-size="12" text-anchor="middle" >TAIL</text>
+<rect x="102" y="70" width="64" height="30" fill="none" stroke="#b8e63c" stroke-width="1.6" class="pulse"/>
+<text x="134" y="62" class="l" font-size="11" text-anchor="middle" >just used: front</text>
+<path class="ar dash" d="M348 104V122H348" stroke="#8a979b"/><text x="348" y="120" class="d" font-size="11" text-anchor="middle" >evict</text>
+<text x="18" y="142" class="d" font-size="11" text-anchor="start" >hash map index  +  doubly linked list  +  a lock</text>
+</svg>

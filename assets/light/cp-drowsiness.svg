@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="150" viewBox="0 0 440 150" role="img" aria-labelledby="t d">
+<title id="t">Drowsiness detection</title>
+<desc id="d">Illustrative eye aspect ratio signal: short blinks, then one prolonged closure below the threshold triggers an alert.</desc>
+<style>
+text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+.serif{font-family:Georgia,"Times New Roman",serif}
+.t{fill:#14181b}.d{fill:#566168}.c{fill:#0f766e}.l{fill:#4d7c0f}
+.ln{fill:none;stroke:#cfd8dc;stroke-width:1}
+.ar{fill:none;stroke:#566168;stroke-width:1.4}
+.sc{fill:none;stroke:#0f766e;stroke-width:2;stroke-linejoin:round}
+.box{fill:#ffffff;stroke:#cfd8dc;stroke-width:1.2}
+.dash{stroke-dasharray:5 4}
+.flow{fill:none;stroke:#0f766e;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:8 92;animation:flow 3.4s linear infinite}
+.lm{stroke:#4d7c0f}
+.pulse{transform-box:fill-box;transform-origin:center;animation:pulse 2.6s ease-in-out infinite}
+.ty{transform-box:fill-box;transform-origin:left center;animation:type 2.2s steps(28) both}
+.blink{animation:blink 1.1s steps(1) infinite}
+.fadein{animation:rise .9s ease-out both}
+.grow{transform-box:fill-box;transform-origin:left center;animation:grow 1.1s ease-out both}
+@keyframes flow{from{stroke-dashoffset:8}to{stroke-dashoffset:-92}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes type{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+<defs><marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#566168"/></marker></defs>
+
+<rect x=".5" y=".5" width="439" height="149" rx="8" fill="#ffffff" stroke="#cfd8dc"/>
+<text x="18" y="26" class="l" font-size="12" text-anchor="start" >checkpoint_04</text>
+<text x="422" y="26" class="d" font-size="12" text-anchor="end" >computer vision</text>
+<path class="ln" d="M0 38H440"/>
+<path class="ln dash" d="M18 104H422"/><text x="422" y="98" class="d" font-size="11" text-anchor="end" >eye-closed threshold</text>
+<clipPath id="rv"><rect class="ty" x="0" y="50" width="440" height="80" style="animation-duration:2.6s;animation-delay:0.3s;animation-timing-function:ease-out"/></clipPath><g clip-path="url(#rv)"><path class="sc" d="M18 78 h40 l2 22 h3 l2 -22 h30 l2 22 h3 l2 -22 h50 l24 40 h48 l24 -40 h50" style="stroke-width:2"/></g>
+<circle class="l pulse" cx="198" cy="118" r="5"/><text x="198" y="104" class="l" font-size="11" text-anchor="middle" >alert</text>
+<text x="18" y="142" class="d" font-size="11" text-anchor="start" >webcam  &gt;  eye aspect ratio  &gt;  alert on prolonged closure</text>
+</svg>

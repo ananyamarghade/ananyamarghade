@@ -1,241 +1,188 @@
 #!/usr/bin/env python3
-"""Generates identity, dashboard, system-map and section-header SVGs.
+"""Builds the profile artwork: the animated "training run" hero and four project checkpoint cards.
 
-Run after fetch_activity.py:  python3 scripts/generate_dashboard.py
-Reuses helpers from generate_assets.py. Stdlib only.
+Run after fetch_activity.py:  python3 scripts/generate_dashboard.py   (scripts/build.py runs it for both themes)
+The curve in the hero is real data: weekly public contributions from data/activity.json. Stdlib only.
 """
-import collections
 import datetime
 import json
 
 import generate_assets as ga
 from generate_assets import svg, T, flow, E, BG, PANEL, RULE, TXT, DIM, CY, LM
 
-ga.CSS += """
-.cell{animation:cin .5s ease-out both}
-@keyframes cin{from{opacity:0}to{opacity:1}}
-"""
 DATA = json.loads((ga.ROOT / "data" / "activity.json").read_text())
 SNAP = DATA["snapshot"]
-FOLLOWERS = DATA["followers"] or "-"
 
 
-def lang_rows():
-    names = {"PLSQL": "PL/SQL"}
-    c = collections.Counter(names.get(r["lang"], r["lang"]) if r["lang"] else "no language" for r in DATA["repos"])
-    rows = sorted(c.items(), key=lambda kv: (-kv[1], kv[0]))
-    if len(rows) > 10:
-        rows = rows[:9] + [(f"other ({len(rows) - 9})", sum(n for _, n in rows[9:]))]
-    return rows
-
-
-LANGS = lang_rows()
-
-
-# ---------------------------------------------------------------- sections
-def section(slug, label, meta=""):
-    lw = 30 + len(label) * 10.8 + 14
-    mw = len(meta) * 7.4 + 16 if meta else 0
-    b = [T(0, 27, "##", "l", 16), T(30, 27, label, "t", 18)]
-    d = f"M{lw:.0f} 22H{900 - mw:.0f}"
-    b += [f'<path class="ln" d="{d}"/>', flow(d, False, 0, "4 96")]
-    if meta:
-        b.append(T(900, 27, meta, "d", 13, "end"))
-    svg(f"section-{slug}.svg", 900, 40, f"Section: {label}",
-        f"Section header: {label}{', ' + meta if meta else ''}.", "\n".join(b))
-
-
-# ------------------------------------------------------------- ascii art
-def ascii_net(cols=44, rows=22):
-    g = [[" "] * cols for _ in range(rows)]
-    layers = [(4, [4, 11, 18]), (15, [2, 8, 14, 20]), (27, [4, 11, 18]), (39, [11])]
-
-    def line(x0, y0, x1, y1):
-        n = max(abs(x1 - x0), abs(y1 - y0))
-        for s in range(n + 1):
-            x = round(x0 + (x1 - x0) * s / n)
-            y = round(y0 + (y1 - y0) * s / n)
-            if g[y][x] == " ":
-                g[y][x] = ":"
-    for (xa, ya), (xb, yb) in zip(layers, layers[1:]):
-        for y1 in ya:
-            for y2 in yb:
-                line(xa, y1, xb, y2)
-    hot = {(4, 4), (15, 8), (27, 18), (39, 11)}
-    for x, ys in layers:
-        for y in ys:
-            g[y][x] = "@" if (x, y) in hot else "O"
-    return ["".join(r) for r in g]
-
-
-def ascii_text(lines, x0, y0, lh, cw, size):
-    out = []
-    cls = {":": "d", "O": "c", "@": "l"}
-    for ri, row in enumerate(lines):
-        runs, i = [], 0
-        while i < len(row):
-            if row[i] == " ":
-                i += 1
-                continue
-            j = i
-            while j < len(row) and row[j] == row[i]:
-                j += 1
-            runs.append((i, row[i], j - i))
-            i = j
-        spans = "".join(f'<tspan x="{x0 + c * cw:.1f}" class="{cls[ch]}">{ch * n}</tspan>' for c, ch, n in runs)
-        out.append(f'<text y="{y0 + ri * lh}" font-size="{size}">{spans}</text>')
-    return "\n".join(out)
-
-
-# ---------------------------------------------------------------- identity
-def identity():
-    """Neofetch-style panel: ASCII network on the left, dotted-leader key/value rows on the right."""
-    W, H = 900, 480
-    CW, X0, X1, SZ = 7.2, 404, 868, 12
-    b = [f'<rect x=".5" y=".5" width="{W-1}" height="{H-1}" rx="10" fill="{BG}" stroke="{RULE}"/>',
-         T(24, 32, "ananyamarghade / README.md", "d", 13), f'<path class="ln" d="M0 46H{W}"/>']
-    b.append(ascii_text(ascii_net(), 32, 92, 16, 7.8, 13))
-    ec = ga.ecg(32, 372, 452, 113)
-    b += [f'<path class="ln" d="{ec}"/>', flow(ec, False, 0, "14 86")]
-    rows = [("name", "ananya@marghade"),
-            ("kv", "Role", "B.Tech CSE, AI & Data Science"),
-            ("kv", "Focus", "AI engineering, software, data systems"),
-            ("kv", "Building", "agents, forecasting, decision support"),
-            ("kv", "Seeking", "SDE and AI/ML internships, research"),
-            ("kv", "Team", "DimensionAI, lead on Aasha"),
-            ("gap",),
-            ("kv", "Languages.Main", "Python, Java, TypeScript, JavaScript, C"),
-            ("kv", "Languages.Other", "SQL (PL/SQL), Assembly, Lex"),
-            ("kv", "ML", "LangGraph, Random Forest, OpenCV, Dlib"),
-            ("kv", "Web", "FastAPI, Gradio, Next.js, Tailwind, Supabase"),
-            ("gap",),
-            ("sect", f"GitHub Stats, {SNAP}"),
-            ("kv", "Repos", f"{DATA['public_repos']} public"),
-            ("kv", "Contributions", f"{DATA['total']} in the last 12 months"),
-            ("kv", "Followers", str(FOLLOWERS)),
-            ("gap",),
-            ("sect", "Contact"),
-            ("kv", "GitHub", "github.com/ananyamarghade")]
-    y, n = 84, 0
-    for r in rows:
-        dl = f"animation-delay:{n * 0.07:.2f}s"
-        if r[0] == "gap":
-            y += 12
-            continue
-        if r[0] in ("name", "sect"):
-            label = r[1]
-            cls = "c" if r[0] == "name" else "l"
-            sz = 15 if r[0] == "name" else SZ
-            b.append(T(X0, y, label, cls + " cell", sz, extra=f'style="{dl}"'))
-            x0 = X0 + len(label) * (sz * 0.6) + 10
-            b.append(f'<path class="ln" d="M{x0:.0f} {y - 4}H{X1}"/>')
-            y += 22
-        else:
-            key, val = r[1] + ":", r[2]
-            xa, xb = X0 + (len(key) + 1) * CW, X1 - (len(val) + 1) * CW
-            b.append(T(X0, y, key, "c cell", SZ, extra=f'style="{dl}"'))
-            b.append(f'<path d="M{xa:.0f} {y - 3}H{xb:.0f}" stroke="{DIM}" stroke-opacity=".6" stroke-width="1.4" '
-                     f'stroke-linecap="round" stroke-dasharray="0.1 5" fill="none"/>')
-            b.append(T(X1, y, val, "t cell", SZ, "end", extra=f'style="{dl}"'))
-            y += 19
-        n += 1
-    svg("identity.svg", W, H, "Ananya Marghade, developer profile",
-        "Terminal-style profile panel. Left: ASCII art of a layered neural network. Right: ananya@marghade. "
-        "B.Tech CSE, AI and Data Science. Focus on AI engineering, software, data systems and research. Building "
-        "agents, forecasting and decision support. Seeking SDE and AI/ML internships and research. DimensionAI, lead "
-        "on Aasha. Languages: Python, Java, TypeScript, JavaScript, C, SQL, Assembly, Lex. ML: LangGraph, Random "
-        "Forest, OpenCV, Dlib. Web: FastAPI, Gradio, Next.js, Tailwind, Supabase. "
-        f"GitHub snapshot {SNAP}: {DATA['public_repos']} public repos, {DATA['total']} contributions in the last "
-        f"12 months, {FOLLOWERS} followers. Contact: github.com/ananyamarghade.", "\n".join(b))
-
-
-# --------------------------------------------------------------- dashboard
-def dashboard():
-    """Contribution heatmap only; the numbers live in the identity panel."""
-    W, H = 900, 180
+def weekly():
+    """Sum contributions per week (Sunday start) from the daily calendar."""
     days = DATA["days"]
     dts = [datetime.date.fromisoformat(d["date"]) for d in days]
     start = dts[0] - datetime.timedelta(days=(dts[0].weekday() + 1) % 7)
-    lvl = ga.LEVELS
-    active = sum(d["count"] > 0 for d in days)
-    X0 = 150
-    b = []
-    seen = set()
+    out = {}
     for d, dt in zip(days, dts):
-        off = (dt - start).days
-        col, row = off // 7, off % 7
-        if (dt.day <= 7 and dt.month not in seen and row == 0) or (dt.day == 1 and dt.month not in seen):
-            seen.add(dt.month)
-            b.append(T(X0 + col * 11, 36, dt.strftime("%b"), "d", 11))
-        b.append(f'<rect class="cell" x="{X0 + col * 11}" y="{44 + row * 11}" width="9" height="9" '
-                 f'fill="{lvl[d["level"]]}" style="animation-delay:{col * 0.03:.2f}s"/>')
-    b.append(T(X0, 146, "less", "d", 12))
-    for i, c in enumerate(lvl):
-        b.append(f'<rect x="{X0 + 38 + i * 13}" y="137" width="9" height="9" fill="{c}"/>')
-    b.append(T(X0 + 108, 146, "more", "d", 12))
-    b.append(T(X0, 172, f"public contributions only, snapshot {SNAP}. Activity, not skill.",
-               "d", 12))
-    svg("dashboard.svg", W, H, "GitHub activity",
-        f"Snapshot {SNAP}. {DATA['total']} public contributions in the last 12 months across {active} active days, "
-        "Contribution heatmap.", "\n".join(b))
+        k = (dt - start).days // 7
+        out[k] = out.get(k, 0) + d["count"]
+    return [out[k] for k in sorted(out)]
 
 
-# -------------------------------------------------------------- system map
-def toolkit_map():
-    W, H = 900, 440
-    cx = [40, 250, 460, 670]
-    ry = lambda r: 84 + r * 46
-    nodes = {"Python": (0, 0), "JavaScript": (0, 1), "C": (0, 2), "TypeScript": (0, 3), "SQL": (0, 4), "Java": (0, 5),
-             "LangGraph": (1, 0), "Random Forest": (1, 1), "OpenCV + Dlib": (1, 2), "Maven": (1, 5),
-             "FastAPI": (2, 0), "Gradio": (2, 1), "Next.js": (2, 3), "Tailwind + Radix": (2, 4),
-             "Vercel": (3, 0), "Supabase": (3, 3), "Netlify": (3, 4)}
-    unlinked = {"JavaScript", "C", "SQL", "Tailwind + Radix"}
+def smooth(pts):
+    """Catmull-Rom to cubic bezier path through pts."""
+    d = f"M{pts[0][0]:.1f} {pts[0][1]:.1f}"
+    for i in range(len(pts) - 1):
+        p0, p1, p2, p3 = pts[max(i - 1, 0)], pts[i], pts[i + 1], pts[min(i + 2, len(pts) - 1)]
+        c1 = (p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6)
+        c2 = (p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6)
+        d += f" C{c1[0]:.1f} {c1[1]:.1f} {c2[0]:.1f} {c2[1]:.1f} {p2[0]:.1f} {p2[1]:.1f}"
+    return d
+
+
+def reveal(cid, x, y, w, h, body, dur=3.0, delay=0.4):
+    """Left-to-right reveal. The un-animated state is the finished drawing."""
+    return (f'<clipPath id="{cid}"><rect class="ty" x="{x}" y="{y}" width="{w}" height="{h}" '
+            f'style="animation-duration:{dur}s;animation-delay:{delay}s;animation-timing-function:ease-out"/></clipPath>'
+            f'<g clip-path="url(#{cid})">{body}</g>')
+
+
+# ------------------------------------------------------------------- hero
+def hero():
+    W, H = 900, 470
+    b = [f'<pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0H0V30" class="ln"/></pattern>',
+         f'<rect width="{W}" height="{H}" fill="url(#g)" opacity=".3"/>',
+         f'<path class="ln" d="M48 58H852"/>',
+         T(48, 40, "~/ananyamarghade  $ python run.py", "d", 14),
+         f'<circle class="l pulse" cx="740" cy="35" r="4"/>',
+         T(852, 40, "run in progress", "d", 14, "end")]
+    b.append('<text class="serif t" x="44" y="132" font-size="64">Ananya Marghade<tspan class="l">.</tspan></text>')
+    log = [("ananya --role", "B.Tech CSE, AI & Data Science"),
+           ("ananya --focus", "agents, forecasting, decision support"),
+           ("ananya --stack", "python java typescript next.js fastapi"),
+           ("ananya --principle", "evidence before claims"),
+           ("ananya --status", "open to SDE, AI/ML internships, research")]
+    for i, (cmd, out) in enumerate(log):
+        y = 170 + i * 24
+        n = len(cmd) + len(out) + 6
+        b.append(f'<clipPath id="c{i}"><rect class="ty" x="48" y="{y - 17}" width="620" height="24" '
+                 f'style="animation-delay:{0.4 + i * 1.5}s;animation-duration:1.3s;animation-timing-function:steps({n})"/></clipPath>')
+        b.append(f'<g clip-path="url(#c{i})"><text x="48" y="{y}" class="l" font-size="15">$</text>'
+                 f'<text x="66" y="{y}" class="d" font-size="15">{E(cmd)}</text>'
+                 f'<text x="252" y="{y}" class="t" font-size="15">{E(out)}</text></g>')
+    ycur = 170 + 4 * 24
+    b.append(f'<rect class="l blink" x="{252 + (len(log[-1][1]) + 1) * 9:.0f}" y="{ycur - 13}" width="8" height="16"/>')
+
+    # training curve = real weekly public contributions
+    wk = weekly()
+    x0, x1, yb, yt = 48, 852, 440, 300
+    mx = max(wk) or 1
+    pts = [(x0 + (x1 - x0) * i / (len(wk) - 1), yb - (yb - yt - 14) * v / mx) for i, v in enumerate(wk)]
+    for gy in (yb, (yb + yt) / 2, yt):
+        b.append(f'<path class="ln dash" d="M{x0} {gy:.0f}H{x1}" opacity=".6"/>')
+    line = smooth(pts)
+    area = line + f" L{x1} {yb} L{x0} {yb} Z"
+    b.append(reveal("rv", 0, 280, 900, 180, f'<path d="{area}" fill="{CY}" fill-opacity=".10"/>'
+                    f'<path class="sc" d="{line}" style="stroke-width:2.2"/>', 3.2, 0.6))
+    px, py = pts[-1]
+    b.append(f'<circle class="l pulse" cx="{px:.1f}" cy="{py:.1f}" r="6"/>')
+    b.append(T(px - 12, py - 12, "now", "l", 13, "end"))
+    top = max(range(len(wk)), key=lambda i: wk[i])
+    b.append(f'<circle cx="{pts[top][0]:.1f}" cy="{pts[top][1]:.1f}" r="4" fill="{PANEL}" stroke="{CY}" stroke-width="1.6"/>')
+    b.append(T(x0, 290, "training curve", "t", 14))
+    b.append(T(x0 + 118, 290, "weekly public contributions, last 12 months. Real data, refreshed daily.", "d", 13))
+    b.append(T(x1, 462, f"snapshot {SNAP}", "d", 12, "end"))
+    b.append(T(x0, 462, "older", "d", 12))
+    svg("hero.svg", W, H, "Ananya Marghade, profile header",
+        "Terminal-style header. Name: Ananya Marghade. Typed lines: B.Tech CSE, AI and Data Science; agents, forecasting "
+        "and decision support; python, java, typescript, next.js, fastapi; evidence before claims; open to SDE and AI/ML "
+        "internships and research. Below it, an animated curve of my weekly public GitHub contributions over the last "
+        f"12 months, snapshot {SNAP}.", "\n".join(b))
+
+
+# ------------------------------------------------------------ checkpoints
+CW, CH = 440, 150
+
+
+def card(slug, idx, label, title, desc, body):
+    b = [f'<rect x=".5" y=".5" width="{CW-1}" height="{CH-1}" rx="8" fill="{PANEL}" stroke="{RULE}"/>',
+         T(18, 26, f"checkpoint_{idx:02d}", "l", 12), T(CW - 18, 26, label, "d", 12, "end"),
+         f'<path class="ln" d="M0 38H{CW}"/>'] + body
+    svg(f"cp-{slug}.svg", CW, CH, title, desc, "\n".join(b), bg=False)
+
+
+def cp_scilens():
+    srcs = ["OpenAlex", "Semantic Scholar", "CrossRef", "arXiv"]
     b = []
-    for x, lab in zip(cx, ["languages", "ml and build", "backend and ui", "data and ship"]):
-        b.append(T(x, 58, lab, "d", 13))
-        b.append(f'<path class="ln" d="M{x} 68H{x + 150}"/>')
+    for i, s in enumerate(srcs):
+        y = 58 + i * 20
+        b.append(T(18, y + 4, s, "d", 11))
+        b.append(f'<path class="ln" d="M130 {y}L196 98"/>')
+        b.append(flow(f"M130 {y}L196 98", i % 2 == 1, i * 0.7))
+    b.append(f'<rect class="box" x="196" y="82" width="74" height="32"/>' + T(233, 102, "extract", "t", 12, "middle"))
+    b.append(f'<path class="ln" d="M270 98H316"/>' + flow("M270 98H316", False, 0.4))
+    b.append(f'<rect class="box" x="316" y="82" width="62" height="32"/>' + T(347, 102, "critic", "c", 12, "middle"))
+    b.append(f'<path class="ar dash" d="M347 82V66H233V82" marker-end="url(#ar)"/>')
+    b.append(f'<circle class="l pulse" cx="405" cy="98" r="7"/>' + f'<path class="ln" d="M378 98H398"/>')
+    b.append(T(405, 124, "gap", "l", 11, "middle"))
+    b.append(T(290, 62, "re-search", "d", 10, "middle"))
+    b.append(T(18, 142, "papers  >  methods  >  evidence-checked gaps", "d", 11))
+    return b
 
-    def out(n):
-        c, r = nodes[n]
-        return cx[c] + 150, ry(r) + 16
 
-    def inn(n):
-        c, r = nodes[n]
-        return cx[c], ry(r) + 16
+def cp_opd():
+    b = []
+    base = 120
+    ys = [100, 92, 96, 84, 90, 74, 80, 66, 72, 60, 68, 58]
+    pts = [(24 + i * 22, y) for i, y in enumerate(ys)]
+    b.append(f'<rect x="{pts[-1][0]}" y="48" width="{CW - 24 - pts[-1][0] - 30 + 24}" height="{base - 48}" fill="{CY}" fill-opacity=".08"/>')
+    b.append(f'<path class="ln dash" d="M18 70H{CW - 18}"/>' + T(24, 64, "overload threshold", "d", 11))
+    d = smooth(pts)
+    b.append(reveal("rv", 0, 40, CW, 90, f'<path class="sc" d="{d}"/>', 2.4, 0.3))
+    b.append(f'<path class="ln dash" d="M{pts[-1][0]} {pts[-1][1]}L{CW - 56} 52" stroke="{LM}"/>')
+    b.append(f'<circle class="l pulse" cx="{CW - 56}" cy="52" r="6"/>' + T(CW - 68, 56, "+3 days?", "l", 11, "end"))
+    b.append(f'<path class="ln" d="M18 {base}H{CW - 18}"/>' + T(24, 142, "daily load  >  rolling features  >  overload 3 days ahead", "d", 11))
+    return b
 
-    def route(a, z, color, dash=False, w=2):
-        (x0, y0), (x1, y1) = out(a), inn(z)
-        d = f"M{x0} {y0}C{x0 + 40} {y0} {x1 - 40} {y1} {x1} {y1}"
-        da = ' stroke-dasharray="5 4"' if dash else ""
-        b.append(f'<path d="{d}" fill="none" stroke="{color}" stroke-opacity=".5" stroke-width="{w}"{da}/>')
-        b.append(f'<path class="flow" pathLength="100" d="{d}" style="stroke:{color};stroke-width:{w + .6}"/>')
 
-    route("Python", "LangGraph", CY); route("LangGraph", "FastAPI", CY); route("FastAPI", "Vercel", CY)
-    route("LangGraph", "Gradio", CY, w=1.4); route("Gradio", "Vercel", CY, w=1.4)
-    route("Python", "Random Forest", LM); route("Python", "OpenCV + Dlib", LM)
-    route("TypeScript", "Next.js", TXT); route("Next.js", "Supabase", TXT); route("Next.js", "Netlify", TXT)
-    route("Java", "Maven", CY, dash=True)
-    # short vertical link Next.js -> Tailwind + Radix
-    nx = cx[2] + 75
-    b.append(f'<path class="ar" d="M{nx} {ry(3) + 32}V{ry(4)}"/>')
-    for n, (c, r) in nodes.items():
-        dim = n in unlinked
-        b.append(f'<rect class="box" x="{cx[c]}" y="{ry(r)}" width="150" height="32"/>')
-        b.append(T(cx[c] + 75, ry(r) + 20.5, n, "d" if dim else "t", 13, "middle"))
-    b.append(T(40, 372, "also: Git; Assembly (microcontrollers lab); Lex (compiler lab); C, SQL, JavaScript (coursework labs)",
-               "d", 12))
-    leg = [("SciLens", CY, False), ("OPD, drowsiness", LM, False), ("SenentialAI", TXT, False), ("LRU cache", CY, True)]
-    for i, (name, col, dash) in enumerate(leg):
-        x = 40 + i * 200
-        da = ' stroke-dasharray="5 4"' if dash else ""
-        b.append(f'<path d="M{x} 408H{x + 28}" stroke="{col}" stroke-width="2.2" fill="none"{da}/>')
-        b.append(T(x + 38, 412, name, "t", 13))
-    svg("toolkit-map.svg", W, H, "Technology system map",
-        "Four columns (languages, ML and build, backend and UI, data and ship) with project routes drawn through them. "
-        "SciLens: Python, LangGraph, FastAPI and Gradio, Vercel. OPD forecasting and drowsiness detection: Python to "
-        "Random Forest and OpenCV with Dlib. SenentialAI: TypeScript, Next.js, Supabase and Netlify. LRU cache: Java "
-        "and Maven. C, SQL and JavaScript are from coursework labs.", "\n".join(b))
+def cp_lru():
+    labels = ["HEAD", "k=7", "k=3", "k=1", "TAIL"]
+    b = []
+    for i, l in enumerate(labels):
+        x = 20 + i * 82
+        cls = "box dash" if l in ("HEAD", "TAIL") else "box"
+        b.append(f'<rect class="{cls}" x="{x}" y="70" width="64" height="30"/>')
+        b.append(T(x + 32, 90, l, "d" if l in ("HEAD", "TAIL") else "t", 12, "middle"))
+        if i < 4:
+            b.append(f'<path class="ar" d="M{x + 64} 82H{x + 82}" marker-start="url(#ar)" marker-end="url(#ar)"/>')
+    b.append(f'<rect x="102" y="70" width="64" height="30" fill="none" stroke="{LM}" stroke-width="1.6" class="pulse"/>')
+    b.append(T(134, 62, "just used: front", "l", 11, "middle"))
+    b.append(f'<path class="ar dash" d="M348 104V122H348" stroke="{DIM}"/>' + T(348, 120, "evict", "d", 11, "middle"))
+    b.append(T(18, 142, "hash map index  +  doubly linked list  +  a lock", "d", 11))
+    return b
+
+
+def cp_drowsy():
+    b = []
+    ys, x, d = [], 18, "M18 78"
+    # eye aspect ratio: blinks, then one prolonged closure
+    seq = [(40, 0), (6, 22), (30, 0), (6, 22), (50, 0), (96, 40), (50, 0)]
+    for dx, dip in seq:
+        d += f" h{dx}" if not dip else f" l{dx / 4:.0f} {dip} h{dx / 2:.0f} l{dx / 4:.0f} {-dip}"
+    b.append(f'<path class="ln dash" d="M18 104H{CW - 18}"/>' + T(CW - 18, 98, "eye-closed threshold", "d", 11, "end"))
+    b.append(reveal("rv", 0, 50, CW, 80, f'<path class="sc" d="{d}" style="stroke-width:2"/>', 2.6, 0.3))
+    b.append(f'<circle class="l pulse" cx="198" cy="118" r="5"/>' + T(198, 104, "alert", "l", 11, "middle"))
+    b.append(T(18, 142, "webcam  >  eye aspect ratio  >  alert on prolonged closure", "d", 11))
+    return b
+
+
+def checkpoints():
+    card("scilens", 1, "research agent", "SciLens pipeline",
+         "Four paper sources feed an extraction step, then a critic that loops back to targeted re-search before a gap is reported.", cp_scilens())
+    card("opd", 2, "forecasting", "Hospital OPD forecasting",
+         "Illustrative: daily hospital load rising toward an overload threshold, with a three-day-ahead question marker.", cp_opd())
+    card("lru", 3, "systems", "LRU cache",
+         "A doubly linked list between HEAD and TAIL; the most recently used key sits at the front, the tail is evicted.", cp_lru())
+    card("drowsiness", 4, "computer vision", "Drowsiness detection",
+         "Illustrative eye aspect ratio signal: short blinks, then one prolonged closure below the threshold triggers an alert.", cp_drowsy())
 
 
 if __name__ == "__main__":
-    identity(); dashboard()
+    hero(); checkpoints()

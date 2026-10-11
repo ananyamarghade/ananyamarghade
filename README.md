@@ -1,36 +1,51 @@
 <picture>
-  <source media="(prefers-color-scheme: light)" srcset="assets/light/identity.svg">
-  <img src="assets/dark/identity.svg" alt="Ananya Marghade. B.Tech CSE student in AI and Data Science. Focus: AI engineering, software, data systems, research. Building agents, forecasting and decision support. Seeking SDE and AI/ML internships and technical research. Languages: Python, Java, TypeScript, JavaScript, C, SQL, Assembly, Lex. GitHub: github.com/ananyamarghade." width="100%">
+  <source media="(prefers-color-scheme: light)" srcset="assets/light/hero.svg">
+  <img src="assets/dark/hero.svg" alt="Ananya Marghade. B.Tech CSE student in AI and Data Science. Focus: agents, forecasting, decision support. Stack: Python, Java, TypeScript, Next.js, FastAPI. Principle: evidence before claims. Open to SDE and AI/ML internships and research. Below, an animated curve of my weekly public GitHub contributions over the last 12 months." width="100%">
 </picture>
 
-I'm a B.Tech CSE student specialising in AI & Data Science. I like building things that work end to end: research agents, forecasting pipelines, and the systems-level code underneath. I'd rather report what I measured than what I hoped for, so every project below says what it is and nothing more.
+<p align="center"><sub>checkpoints saved so far. Click one to open the repo.</sub></p>
 
-**Looking for:** SDE and AI/ML internships, technical research.
+<table>
+<tr>
+<td width="50%" valign="top">
+<a href="https://github.com/ananyamarghade/SciLens-Automated-Research-Gap-Identification"><picture>
+<source media="(prefers-color-scheme: light)" srcset="assets/light/cp-scilens.svg">
+<img src="assets/dark/cp-scilens.svg" alt="SciLens checkpoint card" width="100%">
+</picture></a>
+<b><a href="https://github.com/ananyamarghade/SciLens-Automated-Research-Gap-Identification">SciLens</a></b><br>
+A research-gap agent: searches four paper databases and uses a LangGraph critic loop to check each candidate gap against evidence.<br>
+<sub>`Python` `LangGraph` `FastAPI`</sub>
+</td>
+<td width="50%" valign="top">
+<a href="https://github.com/ananyamarghade/Hospital-OPD-Early-Warning-System"><picture>
+<source media="(prefers-color-scheme: light)" srcset="assets/light/cp-opd.svg">
+<img src="assets/dark/cp-opd.svg" alt="Hospital OPD Early Warning System checkpoint card" width="100%">
+</picture></a>
+<b><a href="https://github.com/ananyamarghade/Hospital-OPD-Early-Warning-System">Hospital OPD Early Warning System</a></b><br>
+Predicts whether an OPD or emergency department will be overloaded three days ahead, from 143,000+ patient records.<br>
+<sub>`Python` `Random Forest`</sub>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+<a href="https://github.com/ananyamarghade/Thread-Safe-In-Memory-Key-Value-Store-with-LRU-Eviction"><picture>
+<source media="(prefers-color-scheme: light)" srcset="assets/light/cp-lru.svg">
+<img src="assets/dark/cp-lru.svg" alt="Thread-safe LRU cache checkpoint card" width="100%">
+</picture></a>
+<b><a href="https://github.com/ananyamarghade/Thread-Safe-In-Memory-Key-Value-Store-with-LRU-Eviction">Thread-safe LRU cache</a></b><br>
+An in-memory key-value store with LRU eviction, built on a hash map and a doubly linked list under a lock.<br>
+<sub>`Java` `Maven`</sub>
+</td>
+<td width="50%" valign="top">
+<a href="https://github.com/ananyamarghade/Driver-Drowsiness-Detection-System-with-UI"><picture>
+<source media="(prefers-color-scheme: light)" srcset="assets/light/cp-drowsiness.svg">
+<img src="assets/dark/cp-drowsiness.svg" alt="Driver Drowsiness Detection checkpoint card" width="100%">
+</picture></a>
+<b><a href="https://github.com/ananyamarghade/Driver-Drowsiness-Detection-System-with-UI">Driver Drowsiness Detection</a></b><br>
+Watches eye aspect ratio from a webcam and sounds an alert on prolonged eye closure.<br>
+<sub>`Python` `OpenCV` `Dlib`</sub>
+</td>
+</tr>
+</table>
 
-### Stack
-
-![Python](https://img.shields.io/badge/Python-0b0d0e?style=flat-square&logo=python&logoColor=4fd1c5)
-![Java](https://img.shields.io/badge/Java-0b0d0e?style=flat-square&logo=openjdk&logoColor=4fd1c5)
-![TypeScript](https://img.shields.io/badge/TypeScript-0b0d0e?style=flat-square&logo=typescript&logoColor=4fd1c5)
-![Next.js](https://img.shields.io/badge/Next.js-0b0d0e?style=flat-square&logo=nextdotjs&logoColor=4fd1c5)
-![FastAPI](https://img.shields.io/badge/FastAPI-0b0d0e?style=flat-square&logo=fastapi&logoColor=4fd1c5)
-![Supabase](https://img.shields.io/badge/Supabase-0b0d0e?style=flat-square&logo=supabase&logoColor=4fd1c5)
-![OpenCV](https://img.shields.io/badge/OpenCV-0b0d0e?style=flat-square&logo=opencv&logoColor=4fd1c5)
-
-Also in coursework: C, SQL (PL/SQL), JavaScript, Assembly, Lex.
-
-### Projects
-
-- **[SciLens](https://github.com/ananyamarghade/SciLens-Automated-Research-Gap-Identification)**: a research-gap agent that searches OpenAlex, Semantic Scholar, CrossRef and arXiv, then uses a LangGraph critic loop to check each candidate gap against evidence. `Python` `LangGraph` `FastAPI`
-- **[Hospital OPD Early Warning System](https://github.com/ananyamarghade/Hospital-OPD-Early-Warning-System)**: predicts whether an OPD or emergency department will be overloaded three days ahead, from 143,000+ patient records. `Python` `Random Forest`
-- **[Thread-safe LRU cache](https://github.com/ananyamarghade/Thread-Safe-In-Memory-Key-Value-Store-with-LRU-Eviction)**: an in-memory key-value store with LRU eviction, built around a hash map and a doubly linked list under a lock. `Java` `Maven`
-- **[Driver Drowsiness Detection](https://github.com/ananyamarghade/Driver-Drowsiness-Detection-System-with-UI)**: watches eye aspect ratio from a webcam and sounds an alert on prolonged eye closure. `Python` `OpenCV` `Dlib`
-
-The rest, including labs and hackathon work, is on [my repositories page](https://github.com/ananyamarghade?tab=repositories).
-
-<picture>
-  <source media="(prefers-color-scheme: light)" srcset="assets/light/dashboard.svg">
-  <img src="assets/dark/dashboard.svg" alt="Contribution heatmap for the last 12 months, refreshed daily by a GitHub Action." width="100%">
-</picture>
-
-<p align="center"><a href="https://github.com/ananyamarghade">github.com/ananyamarghade</a></p>
+<p align="center"><code>exit 0</code> &nbsp;·&nbsp; <a href="https://github.com/ananyamarghade">github.com/ananyamarghade</a> &nbsp;·&nbsp; <a href="https://github.com/ananyamarghade?tab=repositories">all repositories</a></p>
