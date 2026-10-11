@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="300" viewBox="0 0 900 300" role="img" aria-labelledby="t d">
+<title id="t">LRU cache structure diagram</title>
+<desc id="d">A hash map pointing into a doubly linked list between HEAD and TAIL sentinels. Accessed keys move to the front, and the least recently used node at the tail is evicted.</desc>
+<style>
+text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+.serif{font-family:Georgia,"Times New Roman",serif}
+.t{fill:#e8e6df}.d{fill:#8a979b}.c{fill:#4fd1c5}.l{fill:#b8e63c}
+.ln{fill:none;stroke:#26343a;stroke-width:1}
+.ar{fill:none;stroke:#8a979b;stroke-width:1.4}
+.sc{fill:none;stroke:#4fd1c5;stroke-width:2;stroke-linejoin:round}
+.box{fill:#111517;stroke:#26343a;stroke-width:1.2}
+.dash{stroke-dasharray:5 4}
+.flow{fill:none;stroke:#4fd1c5;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:8 92;animation:flow 3.4s linear infinite}
+.lm{stroke:#b8e63c}
+.pulse{transform-box:fill-box;transform-origin:center;animation:pulse 2.6s ease-in-out infinite}
+.ty{transform-box:fill-box;transform-origin:left center;animation:type 2.2s steps(28) both}
+.grow{transform-box:fill-box;transform-origin:left center;animation:grow 1.1s ease-out both}
+@keyframes flow{from{stroke-dashoffset:8}to{stroke-dashoffset:-92}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes type{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+<defs><marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#8a979b"/></marker></defs>
+<rect width="900" height="300" fill="#0b0d0e"/>
+<rect x=".5" y=".5" width="899" height="299" fill="#0b0d0e" stroke="#26343a"/>
+<path class="ln" d="M310 30V270"/>
+<text x="40" y="52" class="d" font-size="14" text-anchor="start" >concurrency</text>
+<text class="serif t" x="40" y="104" font-size="34">Thread-safe</text>
+<text class="serif t" x="40" y="144" font-size="34">LRU cache</text>
+<rect x="40" y="184" width="148" height="26" fill="none" stroke="#b8e63c" stroke-opacity=".7"/>
+<text x="51" y="201" class="l" font-size="12" text-anchor="start" >java + design doc</text>
+<text x="40" y="244" class="d" font-size="13" text-anchor="start" >HashMap + doubly linked list</text>
+<text x="40" y="264" class="d" font-size="13" text-anchor="start" >ReentrantReadWriteLock</text>
+<rect class="box" x="340" y="84" width="100" height="104"/><text x="390.0" y="140.5" class="t" font-size="13" text-anchor="middle"></text>
+<text x="390" y="112" class="t" font-size="13" text-anchor="middle" >HashMap</text>
+<text x="390" y="132" class="d" font-size="12" text-anchor="middle" >key &gt; node</text>
+<text x="390" y="170" class="l" font-size="14" text-anchor="middle" >O(1)</text>
+<rect class="box dash" x="480" y="112" width="58" height="46"/><text x="509.0" y="139.5" class="d" font-size="13" text-anchor="middle">HEAD</text>
+<path class="ar" d="M540 135H558" marker-start="url(#ar)" marker-end="url(#ar)"/>
+<rect class="box" x="558" y="112" width="58" height="46"/><text x="587.0" y="139.5" class="t" font-size="13" text-anchor="middle">k=3</text>
+<path class="ar" d="M618 135H636" marker-start="url(#ar)" marker-end="url(#ar)"/>
+<rect class="box" x="636" y="112" width="58" height="46"/><text x="665.0" y="139.5" class="t" font-size="13" text-anchor="middle">k=1</text>
+<path class="ar" d="M696 135H714" marker-start="url(#ar)" marker-end="url(#ar)"/>
+<rect class="box" x="714" y="112" width="58" height="46"/><text x="743.0" y="139.5" class="t" font-size="13" text-anchor="middle">k=7</text>
+<path class="ar" d="M774 135H792" marker-start="url(#ar)" marker-end="url(#ar)"/>
+<rect class="box dash" x="792" y="112" width="58" height="46"/><text x="821.0" y="139.5" class="d" font-size="13" text-anchor="middle">TAIL</text>
+<path class="ar dash" d="M743 112C743 58 587 58 587 112" marker-end="url(#ar)"/>
+<path class="flow lm" pathLength="100" d="M743 112C743 58 587 58 587 112" style="animation-delay:0.0s;"/>
+<text x="665" y="50" class="c" font-size="12" text-anchor="middle" >get(k): move to front</text>
+<text x="587" y="182" class="d" font-size="12" text-anchor="middle" >most recent</text>
+<path class="ar" d="M743 190V164" marker-end="url(#ar)"/>
+<text x="743" y="206" class="l" font-size="12" text-anchor="middle" >evict here</text>
+<path class="ar dash" d="M390 188V232H667V158" marker-end="url(#ar)"/>
+<text x="528" y="252" class="d" font-size="12" text-anchor="middle" >lookup jumps straight to the node</text>
+<text x="340" y="284" class="d" font-size="12" text-anchor="start" >get() takes the write lock because it reorders the list</text>
+</svg>

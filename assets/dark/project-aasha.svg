@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="300" viewBox="0 0 900 300" role="img" aria-labelledby="t d">
+<title id="t">Project Aasha concept diagram</title>
+<desc id="d">Dashed boxes mark a proposed on-device flow: voice input, symptom analysis, triage and records, with a note that the tool is decision support only and the repository contains design documents.</desc>
+<style>
+text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+.serif{font-family:Georgia,"Times New Roman",serif}
+.t{fill:#e8e6df}.d{fill:#8a979b}.c{fill:#4fd1c5}.l{fill:#b8e63c}
+.ln{fill:none;stroke:#26343a;stroke-width:1}
+.ar{fill:none;stroke:#8a979b;stroke-width:1.4}
+.sc{fill:none;stroke:#4fd1c5;stroke-width:2;stroke-linejoin:round}
+.box{fill:#111517;stroke:#26343a;stroke-width:1.2}
+.dash{stroke-dasharray:5 4}
+.flow{fill:none;stroke:#4fd1c5;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:8 92;animation:flow 3.4s linear infinite}
+.lm{stroke:#b8e63c}
+.pulse{transform-box:fill-box;transform-origin:center;animation:pulse 2.6s ease-in-out infinite}
+.ty{transform-box:fill-box;transform-origin:left center;animation:type 2.2s steps(28) both}
+.grow{transform-box:fill-box;transform-origin:left center;animation:grow 1.1s ease-out both}
+@keyframes flow{from{stroke-dashoffset:8}to{stroke-dashoffset:-92}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes type{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+<defs><marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#8a979b"/></marker></defs>
+<rect width="900" height="300" fill="#0b0d0e"/>
+<rect x=".5" y=".5" width="899" height="299" fill="#0b0d0e" stroke="#26343a"/>
+<path class="ln" d="M310 30V270"/>
+<text x="40" y="52" class="d" font-size="14" text-anchor="start" >healthcare design</text>
+<text class="serif t" x="40" y="104" font-size="34">Project</text>
+<text class="serif t" x="40" y="144" font-size="34">Aasha</text>
+<rect x="40" y="184" width="111" height="26" fill="none" stroke="#b8e63c" stroke-opacity=".7"/>
+<text x="51" y="201" class="l" font-size="12" text-anchor="start" >design stage</text>
+<text x="40" y="244" class="d" font-size="13" text-anchor="start" >voice-first, offline-first</text>
+<text x="40" y="264" class="d" font-size="13" text-anchor="start" >for ASHA and ANM workers</text>
+<rect class="box dash" x="328" y="64" width="500" height="140" fill="none"/>
+<text x="344" y="88" class="d" font-size="12" text-anchor="start" >on device, offline-first (proposed)</text>
+<rect class="box dash" x="344" y="112" width="100" height="56"/><text x="394.0" y="144.5" class="t" font-size="13" text-anchor="middle">voice</text>
+<path class="ar" d="M446 140H466" marker-end="url(#ar)"/>
+<rect class="box dash" x="468" y="112" width="100" height="56"/><text x="518.0" y="144.5" class="t" font-size="13" text-anchor="middle">symptoms</text>
+<path class="ar" d="M570 140H590" marker-end="url(#ar)"/>
+<rect class="box dash" x="592" y="112" width="100" height="56"/><text x="642.0" y="144.5" class="t" font-size="13" text-anchor="middle">triage</text>
+<path class="ar" d="M694 140H714" marker-end="url(#ar)"/>
+<rect class="box dash" x="716" y="112" width="100" height="56"/><text x="766.0" y="144.5" class="t" font-size="13" text-anchor="middle">records</text>
+<path class="ln" d="M394 186H766"/>
+<path class="flow" pathLength="100" d="M394 186H766" style="animation-delay:0.0s;"/>
+<text x="340" y="238" class="t" font-size="13" text-anchor="start" >decision support only; it does not diagnose</text>
+<text x="340" y="262" class="d" font-size="12" text-anchor="start" >the repository holds design documents, not an app</text>
+</svg>
