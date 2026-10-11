@@ -10,11 +10,11 @@
 
 <img src="assets/gifs/cozy-night-coder.gif"
      alt="Cozy night scene — a developer at her laptop on a balcony surrounded by fairy lights and a cat"
-     width="540" />
+     width="720" />
 
 <br/>
 
-<h3>hi &nbsp;<img src="assets/gifs/pikachu.gif" alt="Pikachu waving" width="36" style="vertical-align: middle;" /></h3>
+<h3>hi &nbsp;<img src="assets/gifs/pikachu.gif" alt="Pikachu waving" width="60" style="vertical-align: middle;" /></h3>
 
 # Ananya Marghade
 
