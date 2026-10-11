@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="480" viewBox="0 0 900 480" role="img" aria-labelledby="t d">
+<title id="t">Ananya Marghade, developer profile</title>
+<desc id="d">Terminal-style profile panel. Left: ASCII art of a layered neural network. Right: ananya@marghade. B.Tech CSE, AI and Data Science. Focus on AI engineering, software, data systems and research. Building agents, forecasting and decision support. Seeking SDE and AI/ML internships and research. DimensionAI, lead on Aasha. Languages: Python, Java, TypeScript, JavaScript, C, SQL, Assembly, Lex. ML: LangGraph, Random Forest, OpenCV, Dlib. Web: FastAPI, Gradio, Next.js, Tailwind, Supabase. GitHub snapshot 2026-10-11: 17 public repos, 641 contributions in the last 12 months, 3 followers. Contact: github.com/ananyamarghade.</desc>
+<style>
+text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+.serif{font-family:Georgia,"Times New Roman",serif}
+.t{fill:#14181b}.d{fill:#566168}.c{fill:#0f766e}.l{fill:#4d7c0f}
+.ln{fill:none;stroke:#cfd8dc;stroke-width:1}
+.ar{fill:none;stroke:#566168;stroke-width:1.4}
+.sc{fill:none;stroke:#0f766e;stroke-width:2;stroke-linejoin:round}
+.box{fill:#ffffff;stroke:#cfd8dc;stroke-width:1.2}
+.dash{stroke-dasharray:5 4}
+.flow{fill:none;stroke:#0f766e;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:8 92;animation:flow 3.4s linear infinite}
+.lm{stroke:#4d7c0f}
+.pulse{transform-box:fill-box;transform-origin:center;animation:pulse 2.6s ease-in-out infinite}
+.ty{transform-box:fill-box;transform-origin:left center;animation:type 2.2s steps(28) both}
+.grow{transform-box:fill-box;transform-origin:left center;animation:grow 1.1s ease-out both}
+@keyframes flow{from{stroke-dashoffset:8}to{stroke-dashoffset:-92}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes type{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+
+.cell{animation:cin .5s ease-out both}
+@keyframes cin{from{opacity:0}to{opacity:1}}
+</style>
+<defs><marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#566168"/></marker></defs>
+<rect width="900" height="480" fill="#fbfbf9"/>
+<rect x=".5" y=".5" width="899" height="479" rx="10" fill="#fbfbf9" stroke="#cfd8dc"/>
+<text x="24" y="32" class="d" font-size="13" text-anchor="start" >ananyamarghade / README.md</text>
+<path class="ln" d="M0 46H900"/>
+<text y="92" font-size="13"></text>
+<text y="108" font-size="13"></text>
+<text y="124" font-size="13"><tspan x="133.4" class="d">::</tspan><tspan x="149.0" class="c">O</tspan><tspan x="156.8" class="d">:::</tspan></text>
+<text y="140" font-size="13"><tspan x="86.6" class="d">::::::</tspan><tspan x="141.2" class="d">:</tspan><tspan x="156.8" class="d">:</tspan><tspan x="180.2" class="d">:::::</tspan></text>
+<text y="156" font-size="13"><tspan x="63.2" class="l">@</tspan><tspan x="71.0" class="d">::</tspan><tspan x="125.6" class="d">:::</tspan><tspan x="156.8" class="d">:::</tspan><tspan x="219.2" class="d">:::</tspan><tspan x="242.6" class="c">O</tspan></text>
+<text y="172" font-size="13"><tspan x="71.0" class="d">::::</tspan><tspan x="117.8" class="d">:</tspan><tspan x="133.4" class="d">:</tspan><tspan x="164.6" class="d">:</tspan><tspan x="180.2" class="d">:</tspan><tspan x="211.4" class="d">::::</tspan><tspan x="250.4" class="d">::</tspan></text>
+<text y="188" font-size="13"><tspan x="71.0" class="d">::</tspan><tspan x="102.2" class="d">::</tspan><tspan x="125.6" class="d">:</tspan><tspan x="172.4" class="d">:</tspan><tspan x="188.0" class="d">:::</tspan><tspan x="219.2" class="d">:::</tspan><tspan x="266.0" class="d">::</tspan></text>
+<text y="204" font-size="13"><tspan x="78.8" class="d">::</tspan><tspan x="102.2" class="d">:</tspan><tspan x="117.8" class="d">:::</tspan><tspan x="164.6" class="d">:::</tspan><tspan x="203.6" class="d">::</tspan><tspan x="227.0" class="d">:</tspan><tspan x="281.6" class="d">:</tspan></text>
+<text y="220" font-size="13"><tspan x="86.6" class="d">::</tspan><tspan x="117.8" class="d">:</tspan><tspan x="141.2" class="d">:</tspan><tspan x="149.0" class="l">@</tspan><tspan x="156.8" class="d">::</tspan><tspan x="188.0" class="d">:</tspan><tspan x="203.6" class="d">:::</tspan><tspan x="289.4" class="d">::</tspan></text>
+<text y="236" font-size="13"><tspan x="78.8" class="d">::</tspan><tspan x="102.2" class="d">::::::</tspan><tspan x="156.8" class="d">:</tspan><tspan x="172.4" class="d">::::</tspan><tspan x="211.4" class="d">::</tspan><tspan x="305.0" class="d">::</tspan></text>
+<text y="252" font-size="13"><tspan x="71.0" class="d">:::::::</tspan><tspan x="133.4" class="d">:</tspan><tspan x="164.6" class="d">::</tspan><tspan x="188.0" class="d">:::::::</tspan><tspan x="320.6" class="d">::</tspan></text>
+<text y="268" font-size="13"><tspan x="63.2" class="c">O</tspan><tspan x="71.0" class="d">:</tspan><tspan x="102.2" class="d">:</tspan><tspan x="125.6" class="d">:</tspan><tspan x="180.2" class="d">:</tspan><tspan x="203.6" class="d">:</tspan><tspan x="234.8" class="d">:</tspan><tspan x="242.6" class="c">O</tspan><tspan x="250.4" class="d">:::::::::::</tspan><tspan x="336.2" class="l">@</tspan></text>
+<text y="284" font-size="13"><tspan x="71.0" class="d">:::::::</tspan><tspan x="133.4" class="d">:</tspan><tspan x="164.6" class="d">::</tspan><tspan x="188.0" class="d">:::::::</tspan><tspan x="320.6" class="d">::</tspan></text>
+<text y="300" font-size="13"><tspan x="78.8" class="d">::</tspan><tspan x="102.2" class="d">::::::</tspan><tspan x="156.8" class="d">:</tspan><tspan x="172.4" class="d">::::</tspan><tspan x="211.4" class="d">::</tspan><tspan x="305.0" class="d">::</tspan></text>
+<text y="316" font-size="13"><tspan x="86.6" class="d">::</tspan><tspan x="117.8" class="d">:</tspan><tspan x="141.2" class="d">:</tspan><tspan x="149.0" class="c">O</tspan><tspan x="156.8" class="d">::</tspan><tspan x="188.0" class="d">:</tspan><tspan x="203.6" class="d">:::</tspan><tspan x="289.4" class="d">::</tspan></text>
+<text y="332" font-size="13"><tspan x="78.8" class="d">::</tspan><tspan x="102.2" class="d">:</tspan><tspan x="117.8" class="d">:::</tspan><tspan x="164.6" class="d">:::</tspan><tspan x="203.6" class="d">::</tspan><tspan x="227.0" class="d">:</tspan><tspan x="281.6" class="d">:</tspan></text>
+<text y="348" font-size="13"><tspan x="71.0" class="d">::</tspan><tspan x="102.2" class="d">::</tspan><tspan x="125.6" class="d">:</tspan><tspan x="172.4" class="d">:</tspan><tspan x="188.0" class="d">:::</tspan><tspan x="219.2" class="d">:::</tspan><tspan x="266.0" class="d">::</tspan></text>
+<text y="364" font-size="13"><tspan x="71.0" class="d">::::</tspan><tspan x="117.8" class="d">:</tspan><tspan x="133.4" class="d">:</tspan><tspan x="164.6" class="d">:</tspan><tspan x="180.2" class="d">:</tspan><tspan x="211.4" class="d">::::</tspan><tspan x="250.4" class="d">::</tspan></text>
+<text y="380" font-size="13"><tspan x="63.2" class="c">O</tspan><tspan x="71.0" class="d">::</tspan><tspan x="125.6" class="d">:::</tspan><tspan x="156.8" class="d">:::</tspan><tspan x="219.2" class="d">:::</tspan><tspan x="242.6" class="l">@</tspan></text>
+<text y="396" font-size="13"><tspan x="86.6" class="d">::::::</tspan><tspan x="141.2" class="d">:</tspan><tspan x="156.8" class="d">:</tspan><tspan x="180.2" class="d">:::::</tspan></text>
+<text y="412" font-size="13"><tspan x="133.4" class="d">::</tspan><tspan x="149.0" class="c">O</tspan><tspan x="156.8" class="d">:::</tspan></text>
+<text y="428" font-size="13"></text>
+<path class="ln" d="M32 452 h78 l6 -6 l6 12 l7 -26 l8 41.6 l8 -21.6 h78 l6 -6 l6 12 l7 -26 l8 41.6 l8 -21.6 h78 l6 -6 l6 12 l7 -26 l8 41.6 l8 -21.6 H372"/>
+<path class="flow" pathLength="100" d="M32 452 h78 l6 -6 l6 12 l7 -26 l8 41.6 l8 -21.6 h78 l6 -6 l6 12 l7 -26 l8 41.6 l8 -21.6 h78 l6 -6 l6 12 l7 -26 l8 41.6 l8 -21.6 H372" style="animation-delay:0s;stroke-dasharray:14 86;"/>
+<text x="404" y="84" class="c cell" font-size="15" text-anchor="start" style="animation-delay:0.00s">ananya@marghade</text>
+<path class="ln" d="M549 80H868"/>
+<text x="404" y="106" class="c cell" font-size="12" text-anchor="start" style="animation-delay:0.07s">Role:</text>
+<path d="M447 103H652" stroke="#566168" stroke-opacity=".6" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="0.1 5" fill="none"/>
+<text x="868" y="106" class="t cell" font-size="12" text-anchor="end" style="animation-delay:0.07s">B.Tech CSE, AI &amp; Data Science</text>
+<text x="404" y="125" class="c cell" font-size="12" text-anchor="start" style="animation-delay:0.14s">Focus:</text>
+<path d="M454 122H587" stroke="#566168" stroke-opacity=".6" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="0.1 5" fill="none"/>
+<text x="868" y="125" class="t cell" font-size="12" text-anchor="end" style="animation-delay:0.14s">AI engineering, software, data systems</text>
+<text x="404" y="144" class="c cell" font-size="12" text-anchor="start" style="animation-delay:0.21s">Building:</text>
+<path d="M476 141H594" stroke="#566168" stroke-opacity=".6" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="0.1 5" fill="none"/>
+<text x="868" y="144" class="t cell" font-size="12" text-anchor="end" style="animation-delay:0.21s">agents, forecasting, decision support</text>
+<text x="404" y="163" class="c cell" font-size="12" text-anchor="start" style="animation-delay:0.28s">Seeking:</text>
+<path d="M469 160H609" stroke="#566168" stroke-opacity=".6" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="0.1 5" fill="none"/>
+<text x="868" y="163" class="t cell" font-size="12" text-anchor="end" style="animation-delay:0.28s">SDE and AI/ML internships, research</text>
+<text x="404" y="182" class="c cell" font-size="12" text-anchor="start" style="animation-delay:0.35s">Team:</text>
+<path d="M447 179H674" stroke="#566168" stroke-opacity=".6" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="0.1 5" fill="none"/>
+<text x="868" y="182" class="t cell" font-size="12" text-anchor="end" style="animation-delay:0.35s">DimensionAI, lead on Aasha</text>
+<text x="404" y="213" class="c cell" font-size="12" text-anchor="start" style="animation-delay:0.42s">Languages.Main:</text>
+<path d="M519 210H580" stroke="#566168" stroke-opacity=".6" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="0.1 5" fill="none"/>
+<text x="868" y="213" class="t cell" font-size="12" text-anchor="end" style="animation-delay:0.42s">Python, Java, TypeScript, JavaScript, C</text>
+<text x="404" y="232" class="c cell" font-size="12" text-anchor="start" style="animation-delay:0.49s">Languages.Other:</text>
+<path d="M526 229H666" stroke="#566168" stroke-opacity=".6" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="0.1 5" fill="none"/>
+<text x="868" y="232" class="t cell" font-size="12" text-anchor="end" style="animation-delay:0.49s">SQL (PL/SQL), Assembly, Lex</text>
+<text x="404" y="251" class="c cell" font-size="12" text-anchor="start" style="animation-delay:0.56s">ML:</text>
+<path d="M433 248H587" stroke="#566168" stroke-opacity=".6" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="0.1 5" fill="none"/>
+<text x="868" y="251" class="t cell" font-size="12" text-anchor="end" style="animation-delay:0.56s">LangGraph, Random Forest, OpenCV, Dlib</text>
+<text x="404" y="270" class="c cell" font-size="12" text-anchor="start" style="animation-delay:0.63s">Web:</text>
+<path d="M440 267H544" stroke="#566168" stroke-opacity=".6" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="0.1 5" fill="none"/>
+<text x="868" y="270" class="t cell" font-size="12" text-anchor="end" style="animation-delay:0.63s">FastAPI, Gradio, Next.js, Tailwind, Supabase</text>
+<text x="404" y="301" class="l cell" font-size="12" text-anchor="start" style="animation-delay:0.70s">GitHub Stats, 2026-10-11</text>
+<path class="ln" d="M587 297H868"/>
+<text x="404" y="323" class="c cell" font-size="12" text-anchor="start" style="animation-delay:0.77s">Repos:</text>
+<path d="M454 320H796" stroke="#566168" stroke-opacity=".6" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="0.1 5" fill="none"/>
+<text x="868" y="323" class="t cell" font-size="12" text-anchor="end" style="animation-delay:0.77s">17 public</text>
+<text x="404" y="342" class="c cell" font-size="12" text-anchor="start" style="animation-delay:0.84s">Contributions:</text>
+<path d="M512 339H681" stroke="#566168" stroke-opacity=".6" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="0.1 5" fill="none"/>
+<text x="868" y="342" class="t cell" font-size="12" text-anchor="end" style="animation-delay:0.84s">641 in the last 12 months</text>
+<text x="404" y="361" class="c cell" font-size="12" text-anchor="start" style="animation-delay:0.91s">Followers:</text>
+<path d="M483 358H854" stroke="#566168" stroke-opacity=".6" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="0.1 5" fill="none"/>
+<text x="868" y="361" class="t cell" font-size="12" text-anchor="end" style="animation-delay:0.91s">3</text>
+<text x="404" y="392" class="l cell" font-size="12" text-anchor="start" style="animation-delay:0.98s">Contact</text>
+<path class="ln" d="M464 388H868"/>
+<text x="404" y="414" class="c cell" font-size="12" text-anchor="start" style="animation-delay:1.05s">GitHub:</text>
+<path d="M462 411H681" stroke="#566168" stroke-opacity=".6" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="0.1 5" fill="none"/>
+<text x="868" y="414" class="t cell" font-size="12" text-anchor="end" style="animation-delay:1.05s">github.com/ananyamarghade</text>
+</svg>
