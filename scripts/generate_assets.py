@@ -311,4 +311,4 @@ def closing():
 
 
 if __name__ == "__main__":
-    hero()
+    pass

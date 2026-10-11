@@ -1,6 +1,6 @@
 <picture>
-  <source media="(prefers-color-scheme: light)" srcset="assets/light/hero.svg">
-  <img src="assets/dark/hero.svg" alt="Ananya Marghade. B.Tech CSE student in AI and Data Science. Agents, forecasting, decision support." width="100%">
+  <source media="(prefers-color-scheme: light)" srcset="assets/light/identity.svg">
+  <img src="assets/dark/identity.svg" alt="Ananya Marghade. B.Tech CSE student in AI and Data Science. Focus: AI engineering, software, data systems, research. Building agents, forecasting and decision support. Seeking SDE and AI/ML internships and technical research. Languages: Python, Java, TypeScript, JavaScript, C, SQL, Assembly, Lex. GitHub: github.com/ananyamarghade." width="100%">
 </picture>
 
 I'm a B.Tech CSE student specialising in AI & Data Science. I like building things that work end to end: research agents, forecasting pipelines, and the systems-level code underneath. I'd rather report what I measured than what I hoped for, so every project below says what it is and nothing more.
@@ -28,11 +28,9 @@ Also in coursework: C, SQL (PL/SQL), JavaScript, Assembly, Lex.
 
 The rest, including labs and hackathon work, is on [my repositories page](https://github.com/ananyamarghade?tab=repositories).
 
-### Activity
-
 <picture>
   <source media="(prefers-color-scheme: light)" srcset="assets/light/dashboard.svg">
-  <img src="assets/dark/dashboard.svg" alt="GitHub activity: public contributions in the last 12 months, public repository count, followers and a contribution heatmap. Refreshed daily by a GitHub Action." width="100%">
+  <img src="assets/dark/dashboard.svg" alt="Contribution heatmap for the last 12 months, refreshed daily by a GitHub Action." width="100%">
 </picture>
 
 <p align="center"><a href="https://github.com/ananyamarghade">github.com/ananyamarghade</a></p>

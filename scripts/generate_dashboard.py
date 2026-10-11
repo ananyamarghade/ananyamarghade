@@ -89,70 +89,76 @@ def ascii_text(lines, x0, y0, lh, cw, size):
 
 # ---------------------------------------------------------------- identity
 def identity():
-    W, H = 900, 580
-    b = [f'<rect x=".5" y=".5" width="{W-1}" height="{H-1}" fill="{BG}" stroke="{RULE}"/>',
+    """Neofetch-style panel: ASCII network on the left, dotted-leader key/value rows on the right."""
+    W, H = 900, 480
+    CW, X0, X1, SZ = 7.2, 404, 868, 12
+    b = [f'<rect x=".5" y=".5" width="{W-1}" height="{H-1}" rx="10" fill="{BG}" stroke="{RULE}"/>',
          T(24, 32, "ananyamarghade / README.md", "d", 13), f'<path class="ln" d="M0 46H{W}"/>']
-    b.append(ascii_text(ascii_net(), 36, 92, 16, 7.8, 13))
-    b.append(T(36, 462, "signal  >  model  >  decision", "d", 13))
-    ec = ga.ecg(36, 380, 510, 115)
+    b.append(ascii_text(ascii_net(), 32, 92, 16, 7.8, 13))
+    ec = ga.ecg(32, 372, 452, 113)
     b += [f'<path class="ln" d="{ec}"/>', flow(ec, False, 0, "14 86")]
     rows = [("name", "ananya@marghade"),
-            ("kv", "Role", ["B.Tech CSE, AI & Data Science"]),
-            ("kv", "Focus", ["AI engineering, software,", "data systems, research"]),
-            ("kv", "Building", ["agents, forecasting,", "decision support"]),
-            ("kv", "Seeking", ["SDE and AI/ML internships,", "technical research"]),
-            ("kv", "Team", ["DimensionAI, lead on Aasha"]),
+            ("kv", "Role", "B.Tech CSE, AI & Data Science"),
+            ("kv", "Focus", "AI engineering, software, data systems"),
+            ("kv", "Building", "agents, forecasting, decision support"),
+            ("kv", "Seeking", "SDE and AI/ML internships, research"),
+            ("kv", "Team", "DimensionAI, lead on Aasha"),
             ("gap",),
-            ("kv", "Lang.Programming", ["Python, Java, TypeScript,", "JavaScript, C"]),
-            ("kv", "Lang.Query", ["SQL (PL/SQL)"]),
-            ("kv", "Lang.Low", ["Assembly, Lex"]),
-            ("kv", "ML", ["LangGraph, Random Forest,", "OpenCV, Dlib"]),
-            ("kv", "Web", ["FastAPI, Gradio, Next.js,", "Tailwind, Supabase"]),
+            ("kv", "Languages.Main", "Python, Java, TypeScript, JavaScript, C"),
+            ("kv", "Languages.Other", "SQL (PL/SQL), Assembly, Lex"),
+            ("kv", "ML", "LangGraph, Random Forest, OpenCV, Dlib"),
+            ("kv", "Web", "FastAPI, Gradio, Next.js, Tailwind, Supabase"),
             ("gap",),
-            ("sect", f"GitHub, snapshot {SNAP}"),
-            ("kv", "Public.Repos", [str(DATA["public_repos"])]),
-            ("kv", "Contributions", [f"{DATA['total']} in last 12 months"]),
-            ("kv", "Followers", [str(FOLLOWERS)]),
+            ("sect", f"GitHub Stats, {SNAP}"),
+            ("kv", "Repos", f"{DATA['public_repos']} public"),
+            ("kv", "Contributions", f"{DATA['total']} in the last 12 months"),
+            ("kv", "Followers", str(FOLLOWERS)),
             ("gap",),
             ("sect", "Contact"),
-            ("kv", "GitHub", ["github.com/ananyamarghade"])]
+            ("kv", "GitHub", "github.com/ananyamarghade")]
     y, n = 84, 0
     for r in rows:
         dl = f"animation-delay:{n * 0.07:.2f}s"
         if r[0] == "gap":
-            y += 10
+            y += 12
             continue
         if r[0] in ("name", "sect"):
             label = r[1]
             cls = "c" if r[0] == "name" else "l"
-            b.append(T(420, y, label, cls + " cell", 15 if r[0] == "name" else 13, extra=f'style="{dl}"'))
-            x0 = 420 + len(label) * (9 if r[0] == "name" else 7.8) + 12
-            b.append(f'<path class="ln" d="M{x0:.0f} {y - 4}H860"/>')
-            y += 20
+            sz = 15 if r[0] == "name" else SZ
+            b.append(T(X0, y, label, cls + " cell", sz, extra=f'style="{dl}"'))
+            x0 = X0 + len(label) * (sz * 0.6) + 10
+            b.append(f'<path class="ln" d="M{x0:.0f} {y - 4}H{X1}"/>')
+            y += 22
         else:
-            b.append(T(420, y, r[1] + ":", "c cell", 13, extra=f'style="{dl}"'))
-            for v in r[2]:
-                b.append(T(596, y, v, "t cell", 13, extra=f'style="{dl}"'))
-                y += 17.5
+            key, val = r[1] + ":", r[2]
+            xa, xb = X0 + (len(key) + 1) * CW, X1 - (len(val) + 1) * CW
+            b.append(T(X0, y, key, "c cell", SZ, extra=f'style="{dl}"'))
+            b.append(f'<path d="M{xa:.0f} {y - 3}H{xb:.0f}" stroke="{DIM}" stroke-opacity=".6" stroke-width="1.4" '
+                     f'stroke-linecap="round" stroke-dasharray="0.1 5" fill="none"/>')
+            b.append(T(X1, y, val, "t cell", SZ, "end", extra=f'style="{dl}"'))
+            y += 19
         n += 1
-    svg("identity.svg", W, H, "Developer identity panel",
-        "Terminal-style identity panel. Left: ASCII art of a layered network. Right: Ananya Marghade, B.Tech CSE "
-        "(AI and Data Science); focus on AI engineering, software, data systems and research; building agents, "
-        "forecasting and decision support; seeking SDE and AI/ML internships and technical research; "
-        "DimensionAI team lead on Aasha. Languages Python, Java, TypeScript, JavaScript, C, SQL, Assembly, Lex. "
+    svg("identity.svg", W, H, "Ananya Marghade, developer profile",
+        "Terminal-style profile panel. Left: ASCII art of a layered neural network. Right: ananya@marghade. "
+        "B.Tech CSE, AI and Data Science. Focus on AI engineering, software, data systems and research. Building "
+        "agents, forecasting and decision support. Seeking SDE and AI/ML internships and research. DimensionAI, lead "
+        "on Aasha. Languages: Python, Java, TypeScript, JavaScript, C, SQL, Assembly, Lex. ML: LangGraph, Random "
+        "Forest, OpenCV, Dlib. Web: FastAPI, Gradio, Next.js, Tailwind, Supabase. "
         f"GitHub snapshot {SNAP}: {DATA['public_repos']} public repos, {DATA['total']} contributions in the last "
         f"12 months, {FOLLOWERS} followers. Contact: github.com/ananyamarghade.", "\n".join(b))
 
 
 # --------------------------------------------------------------- dashboard
 def dashboard():
-    """Compact strip: three headline numbers plus the contribution heatmap."""
-    W, H = 900, 190
+    """Contribution heatmap only; the numbers live in the identity panel."""
+    W, H = 900, 180
     days = DATA["days"]
     dts = [datetime.date.fromisoformat(d["date"]) for d in days]
     start = dts[0] - datetime.timedelta(days=(dts[0].weekday() + 1) % 7)
     lvl = ga.LEVELS
     active = sum(d["count"] > 0 for d in days)
+    X0 = 150
     b = []
     seen = set()
     for d, dt in zip(days, dts):
@@ -160,25 +166,18 @@ def dashboard():
         col, row = off // 7, off % 7
         if (dt.day <= 7 and dt.month not in seen and row == 0) or (dt.day == 1 and dt.month not in seen):
             seen.add(dt.month)
-            b.append(T(40 + col * 11, 36, dt.strftime("%b"), "d", 11))
-        b.append(f'<rect class="cell" x="{40 + col * 11}" y="{44 + row * 11}" width="9" height="9" '
+            b.append(T(X0 + col * 11, 36, dt.strftime("%b"), "d", 11))
+        b.append(f'<rect class="cell" x="{X0 + col * 11}" y="{44 + row * 11}" width="9" height="9" '
                  f'fill="{lvl[d["level"]]}" style="animation-delay:{col * 0.03:.2f}s"/>')
-    b.append(T(40, 146, "less", "d", 12))
+    b.append(T(X0, 146, "less", "d", 12))
     for i, c in enumerate(lvl):
-        b.append(f'<rect x="{78 + i * 13}" y="137" width="9" height="9" fill="{c}"/>')
-    b.append(T(148, 146, "more", "d", 12))
-    b.append(f'<path class="ln" d="M640 30V150"/>')
-    tiles = [(str(DATA["total"]), "contributions, 12 mo"), (str(DATA["public_repos"]), "public repositories"),
-             (str(FOLLOWERS), "followers")]
-    for i, (num, lab) in enumerate(tiles):
-        y = 62 + i * 40
-        b.append(f'<text class="serif t" x="660" y="{y}" font-size="30">{E(num)}</text>')
-        b.append(T(735, y - 2, lab, "d", 12))
-    b.append(T(40, 176, f"source: public GitHub pages, snapshot {SNAP}. Public contributions only; counts are activity, not skill.",
+        b.append(f'<rect x="{X0 + 38 + i * 13}" y="137" width="9" height="9" fill="{c}"/>')
+    b.append(T(X0 + 108, 146, "more", "d", 12))
+    b.append(T(X0, 172, f"public contributions only, snapshot {SNAP}. Activity, not skill.",
                "d", 12))
     svg("dashboard.svg", W, H, "GitHub activity",
         f"Snapshot {SNAP}. {DATA['total']} public contributions in the last 12 months across {active} active days, "
-        f"{DATA['public_repos']} public repositories, {FOLLOWERS} followers, with a contribution heatmap.", "\n".join(b))
+        "Contribution heatmap.", "\n".join(b))
 
 
 # -------------------------------------------------------------- system map
@@ -239,4 +238,4 @@ def toolkit_map():
 
 
 if __name__ == "__main__":
-    dashboard()
+    identity(); dashboard()

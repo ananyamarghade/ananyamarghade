@@ -12,8 +12,8 @@
 2. runs `build.py` (regenerates every SVG for both themes),
 3. commits `data/` and `assets/` only if something changed.
 
-Refreshed automatically: contribution total, heatmap, repo count, followers, snapshot date (the compact activity strip).
-Edited by hand: README text, project list, and the hero's typed lines (in `scripts/generate_assets.py`). After editing a generator script, push it and the workflow rebuilds the assets.
+Refreshed automatically: contribution total, heatmap, repo count, followers, snapshot date (identity-panel stats and the heatmap).
+Edited by hand: README text, project list, and the identity panel rows (in `identity()` in `scripts/generate_dashboard.py`). After editing a generator script, push it and the workflow rebuilds the assets.
 
 Caveats: the fetch script parses public GitHub HTML, so a GitHub markup change would make the run fail (you'd see a red run in Actions and the old data would stay in place). GitHub may pause scheduled workflows in repos with no recent activity; use *Run workflow* to resume. I could not run the workflow itself in my sandbox, so it is untested until its first run on GitHub.
 
