@@ -8,7 +8,13 @@
 
 <!-- ── HEADER ─────────────────────────────────────────────── -->
 
-<img src="assets/gifs/waving-hand.gif" alt="Waving hello" width="38" />
+<img src="assets/gifs/cozy-night-coder.gif"
+     alt="Cozy night scene — a developer at her laptop on a balcony surrounded by fairy lights and a cat"
+     width="540" />
+
+<br/>
+
+<h3>hi &nbsp;<img src="assets/gifs/pikachu.gif" alt="Pikachu waving" width="36" style="vertical-align: middle;" /></h3>
 
 # Ananya Marghade
 
@@ -30,12 +36,6 @@
 
 <!-- ── INTRODUCTION ───────────────────────────────────────── -->
 
-<table>
-<tr>
-<td width="58%" valign="top">
-
-<br/>
-
 Hi, I'm **Ananya** — a Computer Science student specialising in **AI & Data Science**, with a focus on agents, forecasting, and decision support.
 
 I'm drawn to the space where rigorous engineering meets genuine curiosity: building systems that learn, reason, and make data actually useful. My work spans machine learning pipelines, applied research, and the occasional side project that starts with *"what if…"* and ends several rabbit-holes later.
@@ -45,19 +45,6 @@ When I'm not writing code I'm usually reading papers, sketching out ideas, or fi
 > *Principle: evidence before claims.*
 
 Open to **SDE and AI/ML internships** and research collaborations.
-
-<br/>
-
-</td>
-<td width="42%" align="center" valign="middle">
-
-<img src="assets/gifs/cozy-night-coder.gif"
-     alt="Cozy night scene — a developer at her laptop on a balcony surrounded by fairy lights and a cat"
-     width="340" />
-
-</td>
-</tr>
-</table>
 
 ---
 
