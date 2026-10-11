@@ -5,7 +5,6 @@
      ====================================================== -->
 
 <!-- top wave -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:51425F,60:B8ACD9,100:D8A1A8&height=130&section=header&animation=fadeIn" width="100%" alt="" />
 
 <div align="center">
 
