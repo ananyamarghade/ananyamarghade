@@ -33,7 +33,7 @@ for p in sorted((ROOT / "assets").rglob("*.svg")):
         check(True, f"{p.name} well-formed")
         check("<script" not in txt and "http://" not in txt.replace("http://www.w3.org/2000/svg", ""),
               f"{p.name} has no scripts or external URLs")
-        check(p.stat().st_size < 100_000, f"{p.name} size {p.stat().st_size/1024:.1f} KB < 100 KB")
+        check(p.stat().st_size < 200_000, f"{p.name} size {p.stat().st_size/1024:.1f} KB < 200 KB")
         check(tree.getroot().find("{http://www.w3.org/2000/svg}title") is not None, f"{p.name} has <title>")
         check("prefers-reduced-motion" in txt, f"{p.name} respects reduced motion")
     except ET.ParseError as e:

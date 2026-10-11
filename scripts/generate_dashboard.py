@@ -45,143 +45,178 @@ def reveal(cid, x, y, w, h, body, dur=3.0, delay=0.4):
 
 
 # ------------------------------------------------------------------- hero
+import base64
+import math
+
+def b64(name):
+    return base64.b64encode((ga.ROOT / "data" / name).read_bytes()).decode()
+
+
 def hero():
-    W, H = 900, 470
-    b = [f'<pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0H0V30" class="ln"/></pattern>',
-         f'<rect width="{W}" height="{H}" fill="url(#g)" opacity=".3"/>',
-         f'<path class="ln" d="M48 58H852"/>',
-         T(48, 40, "~/ananyamarghade  $ python run.py", "d", 14),
-         f'<circle class="l pulse" cx="740" cy="35" r="4"/>',
-         T(852, 40, "run in progress", "d", 14, "end")]
-    b.append('<text class="serif t" x="44" y="132" font-size="64">Ananya Marghade<tspan class="l">.</tspan></text>')
-    log = [("ananya --role", "B.Tech CSE, AI & Data Science"),
-           ("ananya --focus", "agents, forecasting, decision support"),
-           ("ananya --stack", "python java typescript next.js fastapi"),
-           ("ananya --principle", "evidence before claims"),
-           ("ananya --status", "open to SDE, AI/ML internships, research")]
-    for i, (cmd, out) in enumerate(log):
-        y = 170 + i * 24
-        n = len(cmd) + len(out) + 6
-        b.append(f'<clipPath id="c{i}"><rect class="ty" x="48" y="{y - 17}" width="620" height="24" '
-                 f'style="animation-delay:{0.4 + i * 1.5}s;animation-duration:1.3s;animation-timing-function:steps({n})"/></clipPath>')
-        b.append(f'<g clip-path="url(#c{i})"><text x="48" y="{y}" class="l" font-size="15">$</text>'
-                 f'<text x="66" y="{y}" class="d" font-size="15">{E(cmd)}</text>'
-                 f'<text x="252" y="{y}" class="t" font-size="15">{E(out)}</text></g>')
-    ycur = 170 + 4 * 24
-    b.append(f'<rect class="l blink" x="{252 + (len(log[-1][1]) + 1) * 9:.0f}" y="{ycur - 13}" width="8" height="16"/>')
+    W, H = 900, 520
+    PX, PY, PW, PH = 26, 62, 424, 450          # portrait box (mask is 565x600)
+    b = [f'<rect x=".5" y=".5" width="{W-1}" height="{H-1}" rx="10" fill="{BG}" stroke="{RULE}"/>',
+         T(24, 32, "ananyamarghade / README.md", "d", 13), f'<path class="ln" d="M0 46H{W}"/>',
+         f'<circle class="l pulse" cx="{W - 150}" cy="28" r="4"/>', T(W - 24, 33, "run in progress", "d", 13, "end")]
+    # portrait: the original ASCII art, pre-coloured per theme (scripts/make_portrait.py), plus a moving highlight pass
+    base, hl = b64(f"portrait-{ga.THEME}.png"), b64(f"portrait-{ga.THEME}-hl.png")
+    img = (f'x="{PX}" y="{PY}" width="{PW}" height="{PH}" preserveAspectRatio="xMidYMid meet"')
+    b.append(f'<clipPath id="band"><rect class="scan" x="{PX}" y="{PY}" width="{PW}" height="60"/></clipPath>')
+    b.append(f'<image {img} href="data:image/png;base64,{base}"/>')
+    b.append(f'<image {img} clip-path="url(#band)" href="data:image/png;base64,{hl}"/>')
+
+    X = 480
+    b.append(f'<text class="serif t" x="{X}" y="108" font-size="40">Ananya Marghade<tspan class="l">.</tspan></text>')
+    b.append(f'<path class="ln" d="M{X} 124H{W - 28}"/>')
+    log = [("role", "B.Tech CSE, AI & Data Science"),
+           ("focus", "agents, forecasting, decision support"),
+           ("stack", "python java typescript next.js fastapi"),
+           ("principle", "evidence before claims"),
+           ("status", "open to SDE, AI/ML internships, research")]
+    for i, (k, v) in enumerate(log):
+        y = 156 + i * 26
+        n = len(k) + len(v) + 4
+        b.append(f'<clipPath id="c{i}"><rect class="ty" x="{X}" y="{y - 16}" width="{W - X - 20}" height="24" '
+                 f'style="animation-delay:{0.4 + i * 1.3}s;animation-duration:1.1s;animation-timing-function:steps({n})"/></clipPath>')
+        b.append(f'<g clip-path="url(#c{i})"><text x="{X}" y="{y}" class="l" font-size="13">$</text>'
+                 f'<text x="{X + 16}" y="{y}" class="c" font-size="13">{E(k)}</text>'
+                 f'<text x="{X + 106}" y="{y}" class="t" font-size="13">{E(v)}</text></g>')
+    yc = 156 + 4 * 26
+    b.append(f'<rect class="l blink" x="{X + 106 + (len(log[-1][1]) + 1) * 7.8:.0f}" y="{yc - 12}" width="7" height="15"/>')
 
     # training curve = real weekly public contributions
     wk = weekly()
-    x0, x1, yb, yt = 48, 852, 440, 300
+    x0, x1, yb, yt = X, W - 28, 470, 330
     mx = max(wk) or 1
-    pts = [(x0 + (x1 - x0) * i / (len(wk) - 1), yb - (yb - yt - 14) * v / mx) for i, v in enumerate(wk)]
+    pts = [(x0 + (x1 - x0) * i / (len(wk) - 1), yb - (yb - yt - 12) * v / mx) for i, v in enumerate(wk)]
+    b.append(T(X, 302, "training curve", "t", 13))
+    b.append(T(X + 108, 302, "weekly public contributions, 12 months", "d", 11))
     for gy in (yb, (yb + yt) / 2, yt):
         b.append(f'<path class="ln dash" d="M{x0} {gy:.0f}H{x1}" opacity=".6"/>')
     line = smooth(pts)
-    area = line + f" L{x1} {yb} L{x0} {yb} Z"
-    b.append(reveal("rv", 0, 280, 900, 180, f'<path d="{area}" fill="{CY}" fill-opacity=".10"/>'
-                    f'<path class="sc" d="{line}" style="stroke-width:2.2"/>', 3.2, 0.6))
+    b.append(reveal("rv", 0, 310, W, 170, f'<path d="{line} L{x1} {yb} L{x0} {yb} Z" fill="{CY}" fill-opacity=".10"/>'
+                    f'<path class="sc" d="{line}" style="stroke-width:2"/>', 3.2, 0.6))
     px, py = pts[-1]
-    b.append(f'<circle class="l pulse" cx="{px:.1f}" cy="{py:.1f}" r="6"/>')
-    b.append(T(px - 12, py - 12, "now", "l", 13, "end"))
+    b.append(f'<circle class="l pulse" cx="{px:.1f}" cy="{py:.1f}" r="5"/>')
+    b.append(T(px - 10, py - 10, "now", "l", 12, "end"))
     top = max(range(len(wk)), key=lambda i: wk[i])
-    b.append(f'<circle cx="{pts[top][0]:.1f}" cy="{pts[top][1]:.1f}" r="4" fill="{PANEL}" stroke="{CY}" stroke-width="1.6"/>')
-    b.append(T(x0, 290, "training curve", "t", 14))
-    b.append(T(x0 + 118, 290, "weekly public contributions, last 12 months. Real data, refreshed daily.", "d", 13))
-    b.append(T(x1, 462, f"snapshot {SNAP}", "d", 12, "end"))
-    b.append(T(x0, 462, "older", "d", 12))
+    b.append(f'<circle cx="{pts[top][0]:.1f}" cy="{pts[top][1]:.1f}" r="3.5" fill="{PANEL}" stroke="{CY}" stroke-width="1.5"/>')
+    b.append(T(x0, 490, "older", "d", 11))
+    b.append(T(x1, 490, f"snapshot {SNAP}", "d", 11, "end"))
     svg("hero.svg", W, H, "Ananya Marghade, profile header",
-        "Terminal-style header. Name: Ananya Marghade. Typed lines: B.Tech CSE, AI and Data Science; agents, forecasting "
-        "and decision support; python, java, typescript, next.js, fastapi; evidence before claims; open to SDE and AI/ML "
-        "internships and research. Below it, an animated curve of my weekly public GitHub contributions over the last "
-        f"12 months, snapshot {SNAP}.", "\n".join(b))
+        "Terminal-style README panel. Left: an ASCII-art portrait of Ananya. Right: the name Ananya Marghade and typed lines. "
+        "role: B.Tech CSE, AI and Data Science. focus: agents, forecasting, decision support. stack: python java typescript "
+        "next.js fastapi. principle: evidence before claims. status: open to SDE, AI/ML internships and research. Below, an "
+        f"animated curve of weekly public GitHub contributions over the last 12 months, snapshot {SNAP}.", "\n".join(b))
 
 
 # ------------------------------------------------------------ checkpoints
 CW, CH = 440, 150
+GW, GX, GY, GL = 7.8, 20, 70, 17      # char width, x origin, first baseline, line height
+
+
+class Grid:
+    """Monospace character grid; each placed run is positioned absolutely so art stays aligned in any font."""
+
+    def __init__(self, rows):
+        self.rows = [[] for _ in range(rows)]
+
+    def put(self, r, c, text, cls="d"):
+        self.rows[r].append((c, text, cls))
+        return self
+
+    def svg(self, size=13, group=""):
+        out = []
+        for r, runs in enumerate(self.rows):
+            if not runs:
+                continue
+            sp = "".join(f'<tspan x="{GX + c * GW:.1f}" class="{cls}">{E(t)}</tspan>' for c, t, cls in sorted(runs))
+            out.append(f'<text y="{GY + r * GL}" font-size="{size}">{sp}</text>')
+        body = "\n".join(out)
+        return f'<g class="{group}">{body}</g>' if group else body
 
 
 def card(slug, idx, label, title, desc, body):
     b = [f'<rect x=".5" y=".5" width="{CW-1}" height="{CH-1}" rx="8" fill="{PANEL}" stroke="{RULE}"/>',
          T(18, 26, f"checkpoint_{idx:02d}", "l", 12), T(CW - 18, 26, label, "d", 12, "end"),
-         f'<path class="ln" d="M0 38H{CW}"/>'] + body
+         f'<path class="ln" d="M0 38H{CW}"/>', body]
     svg(f"cp-{slug}.svg", CW, CH, title, desc, "\n".join(b), bg=False)
 
 
 def cp_scilens():
-    srcs = ["OpenAlex", "Semantic Scholar", "CrossRef", "arXiv"]
-    b = []
-    for i, s in enumerate(srcs):
-        y = 58 + i * 20
-        b.append(T(18, y + 4, s, "d", 11))
-        b.append(f'<path class="ln" d="M130 {y}L196 98"/>')
-        b.append(flow(f"M130 {y}L196 98", i % 2 == 1, i * 0.7))
-    b.append(f'<rect class="box" x="196" y="82" width="74" height="32"/>' + T(233, 102, "extract", "t", 12, "middle"))
-    b.append(f'<path class="ln" d="M270 98H316"/>' + flow("M270 98H316", False, 0.4))
-    b.append(f'<rect class="box" x="316" y="82" width="62" height="32"/>' + T(347, 102, "critic", "c", 12, "middle"))
-    b.append(f'<path class="ar dash" d="M347 82V66H233V82" marker-end="url(#ar)"/>')
-    b.append(f'<circle class="l pulse" cx="405" cy="98" r="7"/>' + f'<path class="ln" d="M378 98H398"/>')
-    b.append(T(405, 124, "gap", "l", 11, "middle"))
-    b.append(T(290, 62, "re-search", "d", 10, "middle"))
-    b.append(T(18, 142, "papers  >  methods  >  evidence-checked gaps", "d", 11))
-    return b
+    g = Grid(5)
+    for r, s in enumerate(["openalex", "semantic", "crossref", "arxiv   "]):
+        g.put(r, 0, s, "t")
+    g.put(0, 9, "--.", "d").put(1, 9, "--+", "d").put(2, 9, "--+-->", "d").put(3, 9, "--'", "d")
+    g.put(2, 16, "[extract]", "t seq").put(2, 26, "-->", "d").put(2, 30, "[critic]", "c seq s1")
+    g.put(2, 39, "-->", "d").put(2, 43, "gap", "l seq s2")
+    g.put(3, 20, "^", "d").put(3, 34, "|", "d")
+    g.put(4, 20, "'", "d").put(4, 21, "- re-search -", "l seq s3").put(4, 34, "'", "d")
+    return g.svg()
 
 
 def cp_opd():
-    b = []
-    base = 120
-    ys = [100, 92, 96, 84, 90, 74, 80, 66, 72, 60, 68, 58]
-    pts = [(24 + i * 22, y) for i, y in enumerate(ys)]
-    b.append(f'<rect x="{pts[-1][0]}" y="48" width="{CW - 24 - pts[-1][0] - 30 + 24}" height="{base - 48}" fill="{CY}" fill-opacity=".08"/>')
-    b.append(f'<path class="ln dash" d="M18 70H{CW - 18}"/>' + T(24, 64, "overload threshold", "d", 11))
-    d = smooth(pts)
-    b.append(reveal("rv", 0, 40, CW, 90, f'<path class="sc" d="{d}"/>', 2.4, 0.3))
-    b.append(f'<path class="ln dash" d="M{pts[-1][0]} {pts[-1][1]}L{CW - 56} 52" stroke="{LM}"/>')
-    b.append(f'<circle class="l pulse" cx="{CW - 56}" cy="52" r="6"/>' + T(CW - 68, 56, "+3 days?", "l", 11, "end"))
-    b.append(f'<path class="ln" d="M18 {base}H{CW - 18}"/>' + T(24, 142, "daily load  >  rolling features  >  overload 3 days ahead", "d", 11))
-    return b
+    g = Grid(5)
+    cols = 32
+    for i in range(cols):
+        v = 0.12 + 0.62 * i / (cols - 1) + 0.06 * math.sin(i * 0.9)
+        r = min(max(4 - round(v * 4.6), 0), 4)
+        g.put(r, i, "*", "c")
+    for i in range(0, 46):
+        g.put(1, i, "-" if i % 2 == 0 else " ", "d")
+    g.put(0, 0, "overload threshold", "d")
+    for k, i in enumerate(range(33, 41, 2)):
+        g.put(2 - (k // 2), i, ".", "l seq s" + str(k % 4))
+    g.put(0, 42, "?", "l seq s3").put(0, 44, "+3d", "l")
+    g.put(4, 0, "daily load", "d")
+    return g.svg()
 
 
 def cp_lru():
-    labels = ["HEAD", "k=7", "k=3", "k=1", "TAIL"]
-    b = []
-    for i, l in enumerate(labels):
-        x = 20 + i * 82
-        cls = "box dash" if l in ("HEAD", "TAIL") else "box"
-        b.append(f'<rect class="{cls}" x="{x}" y="70" width="64" height="30"/>')
-        b.append(T(x + 32, 90, l, "d" if l in ("HEAD", "TAIL") else "t", 12, "middle"))
-        if i < 4:
-            b.append(f'<path class="ar" d="M{x + 64} 82H{x + 82}" marker-start="url(#ar)" marker-end="url(#ar)"/>')
-    b.append(f'<rect x="102" y="70" width="64" height="30" fill="none" stroke="{LM}" stroke-width="1.6" class="pulse"/>')
-    b.append(T(134, 62, "just used: front", "l", 11, "middle"))
-    b.append(f'<path class="ar dash" d="M348 104V122H348" stroke="{DIM}"/>' + T(348, 120, "evict", "d", 11, "middle"))
-    b.append(T(18, 142, "hash map index  +  doubly linked list  +  a lock", "d", 11))
-    return b
+    g_a, g_b = Grid(5), Grid(5)
+    for g, order, tag in ((g_a, ["k=3", "k=1", "k=7"], "before"), (g_b, ["k=7", "k=3", "k=1"], "after")):
+        g.put(0, 0, "$ get(7)", "l" if tag == "after" else "d")
+        g.put(2, 0, "HEAD", "d")
+        for j, k in enumerate(order):
+            col = 9 + j * 10
+            g.put(2, col - 4, "<->", "d").put(2, col, f"[{k}]", "l" if k == "k=7" else "t")
+        g.put(2, 35, "<->", "d").put(2, 39, "TAIL", "d")
+    g_a.put(3, 29, "^ next out", "d").put(4, 0, "before: k=7 sits next to the tail", "d")
+    g_b.put(3, 9, "^ front", "l").put(3, 29, "^ next out", "d").put(4, 0, "after: k=7 moved to the front", "l")
+    return g_a.svg(group="altA") + "\n" + g_b.svg(group="altB")
 
 
 def cp_drowsy():
-    b = []
-    ys, x, d = [], 18, "M18 78"
-    # eye aspect ratio: blinks, then one prolonged closure
-    seq = [(40, 0), (6, 22), (30, 0), (6, 22), (50, 0), (96, 40), (50, 0)]
-    for dx, dip in seq:
-        d += f" h{dx}" if not dip else f" l{dx / 4:.0f} {dip} h{dx / 2:.0f} l{dx / 4:.0f} {-dip}"
-    b.append(f'<path class="ln dash" d="M18 104H{CW - 18}"/>' + T(CW - 18, 98, "eye-closed threshold", "d", 11, "end"))
-    b.append(reveal("rv", 0, 50, CW, 80, f'<path class="sc" d="{d}" style="stroke-width:2"/>', 2.6, 0.3))
-    b.append(f'<circle class="l pulse" cx="198" cy="118" r="5"/>' + T(198, 104, "alert", "l", 11, "middle"))
-    b.append(T(18, 142, "webcam  >  eye aspect ratio  >  alert on prolonged closure", "d", 11))
-    return b
+    g = Grid(5)
+    cols = 38
+    lvl = [0] * cols
+    for c in (5, 6, 14, 15):
+        lvl[c] = 2
+    for c in range(24, 33):
+        lvl[c] = 4
+    for i, l in enumerate(lvl):
+        g.put(l, i, "*", "c")
+        if i and lvl[i] != lvl[i - 1]:
+            for rr in range(min(lvl[i], lvl[i - 1]) + 1, max(lvl[i], lvl[i - 1])):
+                g.put(rr, i if lvl[i] > lvl[i - 1] else i - 1, "|", "d")
+    for i in range(0, cols + 4):
+        if lvl[i] != 3 if i < cols else True:
+            g.put(3, i, "." if i % 2 == 0 else " ", "d")
+    g.put(1, 26, "closed", "d").put(3, 44, "limit", "d")
+    g.put(4, 34, "<- ALERT", "l blink")
+    g.put(0, 40, "EAR", "d")
+    return g.svg()
 
 
 def checkpoints():
     card("scilens", 1, "research agent", "SciLens pipeline",
-         "Four paper sources feed an extraction step, then a critic that loops back to targeted re-search before a gap is reported.", cp_scilens())
+         "ASCII diagram. Four sources (openalex, semantic scholar, crossref, arxiv) feed extract, then critic, then gap, with a re-search loop from critic back to extract.", cp_scilens())
     card("opd", 2, "forecasting", "Hospital OPD forecasting",
-         "Illustrative: daily hospital load rising toward an overload threshold, with a three-day-ahead question marker.", cp_opd())
+         "ASCII plot, illustrative. Daily load rises toward an overload threshold; dots project three days ahead to a question mark.", cp_opd())
     card("lru", 3, "systems", "LRU cache",
-         "A doubly linked list between HEAD and TAIL; the most recently used key sits at the front, the tail is evicted.", cp_lru())
+         "ASCII diagram alternating between before and after get(7): key 7 moves from next to the tail to the front of the list.", cp_lru())
     card("drowsiness", 4, "computer vision", "Drowsiness detection",
-         "Illustrative eye aspect ratio signal: short blinks, then one prolonged closure below the threshold triggers an alert.", cp_drowsy())
+         "ASCII plot, illustrative. Eye aspect ratio blinks stay above a limit; one long closure drops below it and raises an alert.", cp_drowsy())
 
 
 if __name__ == "__main__":

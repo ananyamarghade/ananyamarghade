@@ -41,12 +41,21 @@ text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",mo
 .ty{transform-box:fill-box;transform-origin:left center;animation:type 2.2s steps(28) both}
 .blink{animation:blink 1.1s steps(1) infinite}
 .fadein{animation:rise .9s ease-out both}
+.seq{animation:seq 3.6s ease-in-out infinite}
+.s1{animation-delay:.6s}.s2{animation-delay:1.2s}.s3{animation-delay:1.8s}
+.altA{opacity:0;animation:altA 7s ease-in-out infinite}
+.altB{animation:altB 7s ease-in-out infinite}
+.scan{animation:scan 6s linear infinite}
 .grow{transform-box:fill-box;transform-origin:left center;animation:grow 1.1s ease-out both}
 @keyframes flow{from{stroke-dashoffset:8}to{stroke-dashoffset:-92}}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 @keyframes type{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
 @keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes seq{0%,100%{opacity:.4}15%,45%{opacity:1}}
+@keyframes altA{0%,42%{opacity:1}50%,92%{opacity:0}100%{opacity:1}}
+@keyframes altB{0%,42%{opacity:0}50%,92%{opacity:1}100%{opacity:0}}
+@keyframes scan{from{transform:translateY(-70px)}to{transform:translateY(520px)}}
 @keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 """
