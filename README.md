@@ -4,6 +4,9 @@
               cream #FAF7F0 · plum #51425F · charcoal #34343B
      ═══════════════════════════════════════════════════════════ -->
 
+<!-- ── TOP WAVE ───────────────────────────────────────────── -->
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:51425F,50:B8ACD9,100:D8A1A8&height=140&section=header&animation=fadeIn" width="100%" alt="header wave" />
+
 <div align="center">
 
 <!-- ── HEADER ─────────────────────────────────────────────── -->
@@ -14,13 +17,14 @@
 
 <br/>
 
-<h3>hi &nbsp;<img src="assets/gifs/pikachu.gif" alt="Pikachu waving" width="60" style="vertical-align: middle;" /></h3>
+<h3>hi &nbsp;<img src="assets/gifs/pikachu.gif" alt="Pikachu" width="60" style="vertical-align: middle;" /></h3>
 
 # Ananya Marghade
 
-**B.Tech CSE · AI & Data Science · Building things that think**
+<!-- Typing SVG -->
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=20&pause=1200&color=B8ACD9&center=true&vCenter=true&width=560&lines=AI+%26+Data+Science+%7C+B.Tech+CSE;Building+things+that+think+%F0%9F%A4%96;Research+%7C+Agents+%7C+Forecasting;Open+to+SDE+%26+AI%2FML+Internships+%E2%9C%A8" alt="Typing animation" />
 
-<br/>
+<br/><br/>
 
 <a href="https://github.com/ananyamarghade">
   <img src="https://img.shields.io/badge/GitHub-ananyamarghade-51425F?style=flat-square&logo=github&logoColor=FAF7F0" alt="GitHub profile" />
@@ -95,54 +99,40 @@ I think the best projects are built incrementally, with room to be wrong early a
 
 ## 🧰 &nbsp;Toolbox
 
-<table>
-<tr>
-<td width="50%" valign="top">
+<div align="center">
 
 **Languages**
 
-![Python](https://img.shields.io/badge/Python-34343B?style=flat-square&logo=python&logoColor=B8ACD9)
-![Java](https://img.shields.io/badge/Java-34343B?style=flat-square&logo=openjdk&logoColor=D8A1A8)
-![TypeScript](https://img.shields.io/badge/TypeScript-34343B?style=flat-square&logo=typescript&logoColor=9EB9A4)
-![SQL](https://img.shields.io/badge/SQL-34343B?style=flat-square&logo=postgresql&logoColor=D8A1A8)
-![C++](https://img.shields.io/badge/C++-34343B?style=flat-square&logo=cplusplus&logoColor=9EB9A4)
-![Bash](https://img.shields.io/badge/Bash-34343B?style=flat-square&logo=gnubash&logoColor=FAF7F0)
+<img src="https://skillicons.dev/icons?i=python,java,ts,cpp,bash&theme=dark&perline=5" alt="Language icons: Python, Java, TypeScript, C++, Bash" />
+&nbsp;&nbsp;
+<img src="https://img.shields.io/badge/SQL-34343B?style=flat-square&logo=postgresql&logoColor=D8A1A8" alt="SQL" />
 
-<br/>
+<br/><br/>
 
-**ML / Data**
+**ML · Data**
 
-![PyTorch](https://img.shields.io/badge/PyTorch-34343B?style=flat-square&logo=pytorch&logoColor=D8A1A8)
-![scikit-learn](https://img.shields.io/badge/scikit--learn-34343B?style=flat-square&logo=scikitlearn&logoColor=9EB9A4)
-![LangGraph](https://img.shields.io/badge/LangGraph-34343B?style=flat-square&logo=python&logoColor=B8ACD9)
-![Pandas](https://img.shields.io/badge/Pandas-34343B?style=flat-square&logo=pandas&logoColor=B8ACD9)
-![NumPy](https://img.shields.io/badge/NumPy-34343B?style=flat-square&logo=numpy&logoColor=FAF7F0)
-![OpenCV](https://img.shields.io/badge/OpenCV-34343B?style=flat-square&logo=opencv&logoColor=9EB9A4)
+<img src="https://skillicons.dev/icons?i=pytorch,sklearn,opencv&theme=dark&perline=5" alt="ML icons: PyTorch, scikit-learn, OpenCV" />
+&nbsp;&nbsp;
+<img src="https://img.shields.io/badge/Pandas-34343B?style=flat-square&logo=pandas&logoColor=B8ACD9" alt="Pandas" />
+<img src="https://img.shields.io/badge/NumPy-34343B?style=flat-square&logo=numpy&logoColor=FAF7F0" alt="NumPy" />
+<img src="https://img.shields.io/badge/LangGraph-34343B?style=flat-square&logo=python&logoColor=B8ACD9" alt="LangGraph" />
+<img src="https://img.shields.io/badge/Jupyter-34343B?style=flat-square&logo=jupyter&logoColor=9EB9A4" alt="Jupyter" />
 
-</td>
-<td width="50%" valign="top">
+<br/><br/>
 
 **Frameworks & Libraries**
 
-![FastAPI](https://img.shields.io/badge/FastAPI-34343B?style=flat-square&logo=fastapi&logoColor=9EB9A4)
-![Next.js](https://img.shields.io/badge/Next.js-34343B?style=flat-square&logo=nextdotjs&logoColor=FAF7F0)
-![React](https://img.shields.io/badge/React-34343B?style=flat-square&logo=react&logoColor=B8ACD9)
-![Flask](https://img.shields.io/badge/Flask-34343B?style=flat-square&logo=flask&logoColor=FAF7F0)
-![Maven](https://img.shields.io/badge/Maven-34343B?style=flat-square&logo=apachemaven&logoColor=D8A1A8)
+<img src="https://skillicons.dev/icons?i=fastapi,nextjs,react,flask&theme=dark&perline=4" alt="Framework icons: FastAPI, Next.js, React, Flask" />
+&nbsp;&nbsp;
+<img src="https://img.shields.io/badge/Maven-34343B?style=flat-square&logo=apachemaven&logoColor=D8A1A8" alt="Maven" />
 
-<br/>
+<br/><br/>
 
 **Tools & Infrastructure**
 
-![Git](https://img.shields.io/badge/Git-34343B?style=flat-square&logo=git&logoColor=D8A1A8)
-![Docker](https://img.shields.io/badge/Docker-34343B?style=flat-square&logo=docker&logoColor=B8ACD9)
-![Linux](https://img.shields.io/badge/Linux-34343B?style=flat-square&logo=linux&logoColor=FAF7F0)
-![VS Code](https://img.shields.io/badge/VS_Code-34343B?style=flat-square&logo=visualstudiocode&logoColor=9EB9A4)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-34343B?style=flat-square&logo=postgresql&logoColor=D8A1A8)
+<img src="https://skillicons.dev/icons?i=git,docker,linux,vscode,postgres&theme=dark&perline=5" alt="Tool icons: Git, Docker, Linux, VS Code, PostgreSQL" />
 
-</td>
-</tr>
-</table>
+</div>
 
 ---
 
@@ -201,6 +191,19 @@ Monitors eye aspect ratio from a webcam and sounds an alert on prolonged eye clo
 
 <div align="center">
 
+<!-- Contribution snake — generated by GitHub Actions (snake.yml) -->
+<picture>
+  <source media="(prefers-color-scheme: dark)"
+          srcset="https://raw.githubusercontent.com/ananyamarghade/ananyamarghade/output/github-contribution-grid-snake-dark.svg" />
+  <source media="(prefers-color-scheme: light)"
+          srcset="https://raw.githubusercontent.com/ananyamarghade/ananyamarghade/output/github-contribution-grid-snake.svg" />
+  <img alt="GitHub contribution snake animation"
+       src="https://raw.githubusercontent.com/ananyamarghade/ananyamarghade/output/github-contribution-grid-snake-dark.svg"
+       width="100%" />
+</picture>
+
+<br/><br/>
+
 <img
   src="https://github-readme-activity-graph.vercel.app/graph?username=ananyamarghade&bg_color=34343B&color=B8ACD9&line=9EB9A4&point=D8A1A8&area=true&area_color=51425F&hide_border=true"
   alt="Ananya's contribution activity graph"
@@ -225,7 +228,7 @@ Monitors eye aspect ratio from a webcam and sounds an alert on prolonged eye clo
 
 ---
 
-<!-- ── CONTACT & FOOTER ───────────────────────────────────── -->
+<!-- ── CONTACT ─────────────────────────────────────────────── -->
 
 <div align="center">
 
@@ -256,3 +259,6 @@ I'm always happy to talk about AI research, interesting datasets, weird edge cas
 </sub>
 
 </div>
+
+<!-- ── BOTTOM WAVE ─────────────────────────────────────────── -->
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:D8A1A8,50:B8ACD9,100:51425F&height=120&section=footer&animation=fadeIn" width="100%" alt="footer wave" />
