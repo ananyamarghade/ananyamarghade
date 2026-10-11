@@ -5,8 +5,6 @@
      ═══════════════════════════════════════════════════════════ -->
 
 <!-- ── TOP WAVE ───────────────────────────────────────────── -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:51425F,50:B8ACD9,100:D8A1A8&height=140&section=header&animation=fadeIn" width="100%" alt="header wave" />
-
 <div align="center">
 
 <!-- ── HERO GIF — full-width rectangle ───────────────────── -->
