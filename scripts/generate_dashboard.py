@@ -146,86 +146,39 @@ def identity():
 
 # --------------------------------------------------------------- dashboard
 def dashboard():
-    W, H = 900, 480
+    """Compact strip: three headline numbers plus the contribution heatmap."""
+    W, H = 900, 190
     days = DATA["days"]
     dts = [datetime.date.fromisoformat(d["date"]) for d in days]
     start = dts[0] - datetime.timedelta(days=(dts[0].weekday() + 1) % 7)
     lvl = ga.LEVELS
     active = sum(d["count"] > 0 for d in days)
-    streak = best = 0
-    for d in days:
-        streak = streak + 1 if d["count"] > 0 else 0
-        best = max(best, streak)
-    top = max(days, key=lambda d: d["count"])
-    top_date = datetime.date.fromisoformat(top["date"]).strftime("%b %d").replace(" 0", " ")
-
     b = []
-    tiles = [(str(DATA["public_repos"]), "public repositories"),
-             (str(DATA["total"]), "contributions, last 12 months"),
-             (str(FOLLOWERS), "followers"),
-             (str(len({r["lang"] for r in DATA["repos"] if r["lang"]})), "primary languages")]
-    for i, (num, lab) in enumerate(tiles):
-        x = 40 + i * 220
-        b.append(f'<text class="serif t" x="{x}" y="86" font-size="46">{E(num)}</text>')
-        b.append(T(x, 110, lab, "d", 13))
-        if i:
-            b.append(f'<path class="ln" d="M{x - 14} 48V118"/>')
-    b.append(f'<path class="ln" d="M40 134H860"/>')
-
-    # heatmap
-    b.append(T(40, 160, "contributions, last 12 months", "t", 14))
     seen = set()
     for d, dt in zip(days, dts):
         off = (dt - start).days
         col, row = off // 7, off % 7
-        if dt.day <= 7 and dt.month not in seen and row == 0 or (dt.day == 1 and dt.month not in seen):
+        if (dt.day <= 7 and dt.month not in seen and row == 0) or (dt.day == 1 and dt.month not in seen):
             seen.add(dt.month)
-            b.append(T(40 + col * 11, 178, dt.strftime("%b"), "d", 11))
-        b.append(f'<rect class="cell" x="{40 + col * 11}" y="{186 + row * 11}" width="9" height="9" '
+            b.append(T(40 + col * 11, 36, dt.strftime("%b"), "d", 11))
+        b.append(f'<rect class="cell" x="{40 + col * 11}" y="{44 + row * 11}" width="9" height="9" '
                  f'fill="{lvl[d["level"]]}" style="animation-delay:{col * 0.03:.2f}s"/>')
-    b.append(T(40, 292, "less", "d", 12))
+    b.append(T(40, 146, "less", "d", 12))
     for i, c in enumerate(lvl):
-        b.append(f'<rect x="{78 + i * 13}" y="283" width="9" height="9" fill="{c}"/>')
-    b.append(T(148, 292, "more", "d", 12))
-    b.append(T(623, 292, "public contributions only", "d", 12, "end"))
-
-    # monthly bars
-    per = collections.OrderedDict()
-    for d, dt in zip(days, dts):
-        per[(dt.year, dt.month)] = per.get((dt.year, dt.month), 0) + d["count"]
-    mx = max(per.values()) or 1
-    b.append(T(40, 322, "contributions per month", "t", 14))
-    base = 420
-    for i, ((yy, mm), v) in enumerate(per.items()):
-        x = 40 + i * 44
-        h = v / mx * 66
-        b.append(f'<rect class="grow" x="{x}" y="{base - h:.1f}" width="30" height="{max(h, 1):.1f}" fill="{CY}" '
-                 f'style="animation-delay:{i * 0.06:.2f}s;transform-origin:center bottom"/>')
-        b.append(T(x + 15, base - h - 6, str(v), "c", 12, "middle"))
-        b.append(T(x + 15, base + 16, datetime.date(yy, mm, 1).strftime("%b"), "d", 12, "middle"))
-    b.append(f'<path class="ln" d="M40 {base}H{40 + len(per) * 44 - 14}"/>')
-
-    # right column
-    b.append(f'<path class="ln" d="M640 150V450"/>')
-    b.append(T(660, 160, "primary language per repo", "t", 14))
-    for i, (l, n) in enumerate(LANGS):
-        y = 178 + i * 17
-        op = "1" if i == 0 else ".55"
-        b.append(T(660, y + 10, l, "d", 12))
-        b.append(f'<rect class="grow" x="790" y="{y}" width="{n * 16}" height="11" fill="{CY}" fill-opacity="{op}" '
-                 f'style="animation-delay:{i * 0.08:.2f}s"/>')
-        b.append(T(790 + n * 16 + 6, y + 10, str(n), "c", 12))
-    b.append(T(660, 372, "activity facts", "t", 14))
-    b.append(T(660, 394, f"active days: {active} of {len(days)}", "d", 13))
-    b.append(T(660, 413, f"longest streak: {best} days", "d", 13))
-    b.append(T(660, 432, f"best day: {top['count']} ({top_date})", "d", 13))
-    b.append(T(40, 466, f"source: public GitHub pages for ananyamarghade, snapshot {SNAP}. Counts are not a measure of skill.",
+        b.append(f'<rect x="{78 + i * 13}" y="137" width="9" height="9" fill="{c}"/>')
+    b.append(T(148, 146, "more", "d", 12))
+    b.append(f'<path class="ln" d="M640 30V150"/>')
+    tiles = [(str(DATA["total"]), "contributions, 12 mo"), (str(DATA["public_repos"]), "public repositories"),
+             (str(FOLLOWERS), "followers")]
+    for i, (num, lab) in enumerate(tiles):
+        y = 62 + i * 40
+        b.append(f'<text class="serif t" x="660" y="{y}" font-size="30">{E(num)}</text>')
+        b.append(T(735, y - 2, lab, "d", 12))
+    b.append(T(40, 176, f"source: public GitHub pages, snapshot {SNAP}. Public contributions only; counts are activity, not skill.",
                "d", 12))
-    svg("dashboard.svg", W, H, "GitHub activity dashboard",
-        f"Snapshot {SNAP}. {DATA['public_repos']} public repositories, {DATA['total']} contributions in the last "
-        f"12 months across {active} active days, longest streak {best} days, best day {top['count']} on "
-        f"{top_date}. Includes a contribution heatmap, a monthly contributions bar chart and a chart of primary "
-        "language per repository.", "\n".join(b))
+    svg("dashboard.svg", W, H, "GitHub activity",
+        f"Snapshot {SNAP}. {DATA['total']} public contributions in the last 12 months across {active} active days, "
+        f"{DATA['public_repos']} public repositories, {FOLLOWERS} followers, with a contribution heatmap.", "\n".join(b))
 
 
 # -------------------------------------------------------------- system map
@@ -286,9 +239,4 @@ def toolkit_map():
 
 
 if __name__ == "__main__":
-    section("identity", "identity", "terminal")
-    section("dashboard", "dashboard", f"github snapshot {SNAP}")
-    section("projects", "projects", "5 repositories")
-    section("system-map", "system map", "from repo evidence")
-    section("contact", "contact")
-    identity(); dashboard(); toolkit_map()
+    dashboard()

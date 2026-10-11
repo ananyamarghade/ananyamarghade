@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="460" viewBox="0 0 900 460" role="img" aria-labelledby="t d">
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="300" viewBox="0 0 900 300" role="img" aria-labelledby="t d">
 <title id="t">Ananya Marghade, profile header</title>
-<desc id="d">Dark header with the name Ananya Marghade, three typed lines (B.Tech CSE with AI and Data Science, agents, forecasting and decision support, evidence before claims), an animated neural-network style graph with signal pulses, and a signal trace along the bottom.</desc>
+<desc id="d">Header with the name Ananya Marghade, two typed lines (B.Tech CSE with AI and Data Science; agents, forecasting and decision support), a small animated neural-network graph and a signal trace along the bottom.</desc>
 <style>
 text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
 .serif{font-family:Georgia,"Times New Roman",serif}
@@ -22,13 +22,14 @@ text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",mo
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 <defs><marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L8 4L0 8z" fill="#8a979b"/></marker></defs>
-<rect width="900" height="460" fill="#0b0d0e"/>
+<rect width="900" height="300" fill="#0b0d0e"/>
 <pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0H0V30" class="ln"/></pattern>
-<rect width="900" height="460" fill="url(#g)" opacity=".35"/>
-<path class="ln" d="M48 78H852"/>
-<text x="48" y="56" class="d" font-size="14" text-anchor="start" >~/ananyamarghade</text>
-<circle class="l pulse" cx="684" cy="51" r="4"/>
-<text x="852" y="56" class="d" font-size="14" text-anchor="end" >ai, software, data</text>
+<rect width="900" height="300" fill="url(#g)" opacity=".35"/>
+<path class="ln" d="M48 58H852"/>
+<text x="48" y="40" class="d" font-size="14" text-anchor="start" >~/ananyamarghade</text>
+<circle class="l pulse" cx="684" cy="35" r="4"/>
+<text x="852" y="40" class="d" font-size="14" text-anchor="end" >ai, software, data</text>
+<g transform="translate(240 24) scale(.7)">
 <path class="ln" d="M590 120L690 90"/>
 <path class="ln" d="M590 120L690 160"/>
 <path class="ln" d="M590 120L690 230"/>
@@ -70,15 +71,14 @@ text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",mo
 <circle cx="790" cy="200" r="5" fill="#111517" stroke="#4fd1c5" stroke-width="1.6"/>
 <circle class="l pulse" cx="790" cy="280" r="6" style="animation-delay:1.6s"/>
 <circle cx="868" cy="200" r="5" fill="#111517" stroke="#4fd1c5" stroke-width="1.6"/>
-<text x="590" y="346" class="d" font-size="13" text-anchor="start" >data  &gt;  model  &gt;  decision</text>
-<text class="serif t" x="44" y="190" font-size="88">Ananya</text>
-<text class="serif t" x="44" y="272" font-size="88">Marghade<tspan class="l">.</tspan></text>
-<clipPath id="c0"><rect class="ty" x="48" y="306" width="520" height="28" style="animation-delay:0.5s;animation-timing-function:steps(29)"/></clipPath>
-<g clip-path="url(#c0)"><text x="48" y="326" class="d" font-size="17">&gt;&gt; </text><text x="78" y="326" class="t" font-size="17">B.Tech CSE, AI &amp; Data Science</text></g>
-<clipPath id="c1"><rect class="ty" x="48" y="334" width="520" height="28" style="animation-delay:2.9s;animation-timing-function:steps(37)"/></clipPath>
-<g clip-path="url(#c1)"><text x="48" y="354" class="d" font-size="17">&gt;&gt; </text><text x="78" y="354" class="t" font-size="17">agents, forecasting, decision support</text></g>
-<clipPath id="c2"><rect class="ty" x="48" y="362" width="520" height="28" style="animation-delay:5.3s;animation-timing-function:steps(22)"/></clipPath>
-<g clip-path="url(#c2)"><text x="48" y="382" class="d" font-size="17">&gt;&gt; </text><text x="78" y="382" class="t" font-size="17">evidence before claims</text></g>
-<path class="ln" d="M48 428 h125 l6 -6 l6 12 l7 -26 l8 41.6 l8 -21.6 h125 l6 -6 l6 12 l7 -26 l8 41.6 l8 -21.6 h125 l6 -6 l6 12 l7 -26 l8 41.6 l8 -21.6 h125 l6 -6 l6 12 l7 -26 l8 41.6 l8 -21.6 h125 l6 -6 l6 12 l7 -26 l8 41.6 l8 -21.6 H852"/>
-<path class="flow" pathLength="100" d="M48 428 h125 l6 -6 l6 12 l7 -26 l8 41.6 l8 -21.6 h125 l6 -6 l6 12 l7 -26 l8 41.6 l8 -21.6 h125 l6 -6 l6 12 l7 -26 l8 41.6 l8 -21.6 h125 l6 -6 l6 12 l7 -26 l8 41.6 l8 -21.6 h125 l6 -6 l6 12 l7 -26 l8 41.6 l8 -21.6 H852" style="animation-delay:0s;stroke-dasharray:14 86;"/>
+</g>
+<text x="653" y="250" class="d" font-size="12" text-anchor="start" >data  &gt;  model  &gt;  decision</text>
+<text class="serif t" x="44" y="132" font-size="70">Ananya</text>
+<text class="serif t" x="44" y="200" font-size="70">Marghade<tspan class="l">.</tspan></text>
+<clipPath id="c0"><rect class="ty" x="48" y="213" width="520" height="26" style="animation-delay:0.5s;animation-timing-function:steps(29)"/></clipPath>
+<g clip-path="url(#c0)"><text x="48" y="232" class="d" font-size="16">&gt;&gt; </text><text x="76" y="232" class="t" font-size="16">B.Tech CSE, AI &amp; Data Science</text></g>
+<clipPath id="c1"><rect class="ty" x="48" y="239" width="520" height="26" style="animation-delay:2.9s;animation-timing-function:steps(37)"/></clipPath>
+<g clip-path="url(#c1)"><text x="48" y="258" class="d" font-size="16">&gt;&gt; </text><text x="76" y="258" class="t" font-size="16">agents, forecasting, decision support</text></g>
+<path class="ln" d="M48 288 h125 l6 -6 l6 12 l7 -26 l8 41.6 l8 -21.6 h125 l6 -6 l6 12 l7 -26 l8 41.6 l8 -21.6 h125 l6 -6 l6 12 l7 -26 l8 41.6 l8 -21.6 h125 l6 -6 l6 12 l7 -26 l8 41.6 l8 -21.6 h125 l6 -6 l6 12 l7 -26 l8 41.6 l8 -21.6 H852"/>
+<path class="flow" pathLength="100" d="M48 288 h125 l6 -6 l6 12 l7 -26 l8 41.6 l8 -21.6 h125 l6 -6 l6 12 l7 -26 l8 41.6 l8 -21.6 h125 l6 -6 l6 12 l7 -26 l8 41.6 l8 -21.6 h125 l6 -6 l6 12 l7 -26 l8 41.6 l8 -21.6 h125 l6 -6 l6 12 l7 -26 l8 41.6 l8 -21.6 H852" style="animation-delay:0s;stroke-dasharray:14 86;"/>
 </svg>

@@ -12,8 +12,8 @@
 2. runs `build.py` (regenerates every SVG for both themes),
 3. commits `data/` and `assets/` only if something changed.
 
-Refreshed automatically: repo count, contribution total, heatmap, monthly chart, language chart, followers, snapshot dates, identity-panel stats.
-Edited by hand: the identity text (role, focus, languages), project cards and captions, toolkit map, README prose. After editing a generator script, push it and the workflow rebuilds the assets.
+Refreshed automatically: contribution total, heatmap, repo count, followers, snapshot date (the compact activity strip).
+Edited by hand: README text, project list, and the hero's typed lines (in `scripts/generate_assets.py`). After editing a generator script, push it and the workflow rebuilds the assets.
 
 Caveats: the fetch script parses public GitHub HTML, so a GitHub markup change would make the run fail (you'd see a red run in Actions and the old data would stay in place). GitHub may pause scheduled workflows in repos with no recent activity; use *Run workflow* to resume. I could not run the workflow itself in my sandbox, so it is untested until its first run on GitHub.
 
@@ -32,14 +32,8 @@ python3 scripts/validate.py         # add --online to check external links
 - **From project READMEs (I did not read source code):** project descriptions. OPD metrics (ROC-AUC ≈ 0.81 etc.) are self-reported in that repo's README.
 - No invented stars, hours, proficiency bars, achievements, email or LinkedIn.
 
-## Left out (no public repo or evidence found)
-FraudShield, VitalCare, NSCLC Digital Twin, dyslexia platform, VitaTrace, achievements/research. Send links or summaries to add them.
-
-## Fix before publishing
-- SenentialAI needs a README; its repo name seems to contain a typo ("Senential"), used verbatim so links work.
-- Confirm the two CSVs in the OPD repo are public-licensed and free of patient identifiers.
-- Add LinkedIn/email to Contact if you want them public.
+## Left out
+Project Aasha (design stage only) and SenentialAI (empty README) are not featured. FraudShield, VitalCare, NSCLC Digital Twin and similar had no public repo. The SciLens live demo link was dropped because it could not be verified from the build sandbox; re-add it if it is live.
 
 ## Validation status
-Done: `validate.py` (234 checks passed: local files, both theme folders match, SVG well-formedness, anchors, alt text, secret-like strings, sizes); static renders of the dark and light artwork with CairoSVG, which does not run CSS animation.
-**Not done, please check on GitHub:** the Action's first run; that animations play through GitHub's image proxy (the static state is complete if not); that GitHub switches to the light images in light mode; phone layout (diagram text is 12-13 px and shrinks on phones, so each graphic has alt text and the identity panel has a plain-text version).
+`scripts/validate.py` passes (local files, SVG well-formedness, anchors, alt text). Not verified: the Action's first run, animation and light/dark switching on GitHub, phone layout.

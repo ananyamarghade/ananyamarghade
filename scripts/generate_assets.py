@@ -90,54 +90,53 @@ def ecg(x0, x1, y, step):
 
 # --------------------------------------------------------------------- hero
 def hero():
-    W, H = 900, 460
+    W, H = 900, 300
     b = [f'<pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0H0V30" class="ln"/></pattern>',
          f'<rect width="{W}" height="{H}" fill="url(#g)" opacity=".35"/>']
-    # frame + header
-    b.append(f'<path class="ln" d="M48 78H852"/>')
-    b.append(T(48, 56, "~/ananyamarghade", "d", 14))
-    b.append(f'<circle class="l pulse" cx="684" cy="51" r="4"/>')
-    b.append(T(852, 56, "ai, software, data", "d", 14, "end"))
-    # network (right)
+    b.append(f'<path class="ln" d="M48 58H852"/>')
+    b.append(T(48, 40, "~/ananyamarghade", "d", 14))
+    b.append(f'<circle class="l pulse" cx="684" cy="35" r="4"/>')
+    b.append(T(852, 40, "ai, software, data", "d", 14, "end"))
+    # network (right), scaled down into a compact block
     layers = [(590, [120, 200, 280]), (690, [90, 160, 230, 300]), (790, [120, 200, 280]), (868, [200])]
+    g = ['<g transform="translate(240 24) scale(.7)">']
     for (xa, ya), (xb, yb) in zip(layers, layers[1:]):
         for y1 in ya:
             for y2 in yb:
-                b.append(f'<path class="ln" d="M{xa} {y1}L{xb} {y2}"/>')
+                g.append(f'<path class="ln" d="M{xa} {y1}L{xb} {y2}"/>')
     chains = [([(590, 200), (690, 160), (790, 200), (868, 200)], False, 0),
               ([(590, 120), (690, 230), (790, 280), (868, 200)], True, 1.1),
               ([(590, 280), (690, 90), (790, 120), (868, 200)], False, 2.2)]
     for pts, lm, dl in chains:
-        d = "M" + "L".join(f"{x} {y}" for x, y in pts)
-        b.append(flow(d, lm, dl))
+        g.append(flow("M" + "L".join(f"{x} {y}" for x, y in pts), lm, dl))
     for i, (x, ys) in enumerate(layers):
         for j, y in enumerate(ys):
-            hot = (i, j) in [(1, 1), (2, 2), (0, 0)]
-            if hot:
-                b.append(f'<circle class="l pulse" cx="{x}" cy="{y}" r="6" style="animation-delay:{(i + j) * 0.4}s"/>')
+            if (i, j) in [(1, 1), (2, 2), (0, 0)]:
+                g.append(f'<circle class="l pulse" cx="{x}" cy="{y}" r="6" style="animation-delay:{(i + j) * 0.4}s"/>')
             else:
-                b.append(f'<circle cx="{x}" cy="{y}" r="5" fill="{PANEL}" stroke="{CY}" stroke-width="1.6"/>')
-    b.append(T(590, 346, "data  >  model  >  decision", "d", 13))
+                g.append(f'<circle cx="{x}" cy="{y}" r="5" fill="{PANEL}" stroke="{CY}" stroke-width="1.6"/>')
+    g.append('</g>')
+    b += g
+    b.append(T(653, 250, "data  >  model  >  decision", "d", 12))
     # title
-    b.append(f'<text class="serif t" x="44" y="190" font-size="88">Ananya</text>')
-    b.append(f'<text class="serif t" x="44" y="272" font-size="88">Marghade<tspan class="l">.</tspan></text>')
+    b.append(f'<text class="serif t" x="44" y="132" font-size="70">Ananya</text>')
+    b.append(f'<text class="serif t" x="44" y="200" font-size="70">Marghade<tspan class="l">.</tspan></text>')
     # typed statements
-    lines = ["B.Tech CSE, AI & Data Science", "agents, forecasting, decision support", "evidence before claims"]
+    lines = ["B.Tech CSE, AI & Data Science", "agents, forecasting, decision support"]
     for i, s in enumerate(lines):
-        y = 326 + i * 28
+        y = 232 + i * 26
         cid = f"c{i}"
-        b.append(f'<clipPath id="{cid}"><rect class="ty" x="48" y="{y - 20}" width="520" height="28" '
+        b.append(f'<clipPath id="{cid}"><rect class="ty" x="48" y="{y - 19}" width="520" height="26" '
                  f'style="animation-delay:{0.5 + i * 2.4}s;animation-timing-function:steps({len(s)})"/></clipPath>')
-        b.append(f'<g clip-path="url(#{cid})"><text x="48" y="{y}" class="d" font-size="17">&gt;&gt; </text>'
-                 f'<text x="78" y="{y}" class="t" font-size="17">{E(s)}</text></g>')
-    # signal trace
-    d = ecg(48, 852, 428, 160)
+        b.append(f'<g clip-path="url(#{cid})"><text x="48" y="{y}" class="d" font-size="16">&gt;&gt; </text>'
+                 f'<text x="76" y="{y}" class="t" font-size="16">{E(s)}</text></g>')
+    d = ecg(48, 852, 288, 160)
     b.append(f'<path class="ln" d="{d}"/>')
     b.append(flow(d, False, 0, "14 86"))
     svg("hero.svg", W, H, "Ananya Marghade, profile header",
-        "Dark header with the name Ananya Marghade, three typed lines (B.Tech CSE with AI and Data Science, agents, "
-        "forecasting and decision support, evidence before claims), an animated neural-network style graph with "
-        "signal pulses, and a signal trace along the bottom.", "\n".join(b))
+        "Header with the name Ananya Marghade, two typed lines (B.Tech CSE with AI and Data Science; agents, "
+        "forecasting and decision support), a small animated neural-network graph and a signal trace along the bottom.",
+        "\n".join(b))
 
 
 # ------------------------------------------------------------------ divider
@@ -312,4 +311,4 @@ def closing():
 
 
 if __name__ == "__main__":
-    hero(); scilens(); opd(); lru(); aasha(); sentinel(); closing()
+    hero()
